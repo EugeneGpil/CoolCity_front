@@ -15,20 +15,26 @@
 </template>
 
 <script>
+
+import FlagPaths from '~/settings/flags'
+import RouterSharedMethods from '~/shared_methods/router'
+import LocalStorageSharedMethods from '~/shared_methods/local_storage'
+
 export default {
 
   data() {
     return {
-      flag: '/images/flags/flag-thailand.png',
+      flag: FlagPaths.thai_flag_path,
     }
   },
   
   mounted() {
-    let selectedLanguage = localStorage.getItem('selected_language')
+    const selectedLanguage = LocalStorageSharedMethods.getLanguage()
     if (!selectedLanguage) {
       this.goToLanguageSelect()
       return;
     }
+    this.$i18n.setLocale(selectedLanguage)
     this.$store.dispatch('language/setLanguage', selectedLanguage)
   },
 
@@ -36,7 +42,8 @@ export default {
 
     goToLanguageSelect() {
       this.$store.dispatch('language/setPageToReturnAfterLanguageSelect', 'index')
-      this.$router.push({name: 'language_select'})
+      // RouterSharedMethods.goTo('language_select')
+      this.$router.push({name: RouterSharedMethods.getRouteNameWithLocale('language_select')})
     }
 
   },
@@ -52,16 +59,16 @@ export default {
   watch: {
 
     language() {
-      let flagPath = '/images/flags/flag-thailand.png'
+      let flagPath = FlagPaths.thai_flag_path
 
-      if (this.language == 'thai') {
-        flagPath = '/images/flags/flag-thailand.png'
+      if (this.language == 'th') {
+        flagPath = FlagPaths.thai_flag_path
 
-      } else if (this.language == 'english') {
-        flagPath = '/images/flags/flag-great-britain.png'
+      } else if (this.language == 'en') {
+        flagPath = FlagPaths.british_flag_path
 
-      } else if (this.language == 'russian') {
-        flagPath = '/images/flags/flag-russia.png'
+      } else if (this.language == 'ru') {
+        flagPath = FlagPaths.russian_flag_path
       }
 
       this.flag = flagPath
