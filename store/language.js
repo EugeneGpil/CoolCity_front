@@ -17,7 +17,6 @@ export const mutations = {
 }
 
 export const actions = {
-
   setPageToReturnAfterLanguageSelect(context, pageName) {
     context.commit('setPageToReturnAfterLanguageSelect', pageName)
   },

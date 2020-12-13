@@ -1,48 +1,72 @@
 <template>
   <div>
-    <div class="language-row" @click="setLanguage('thai')">
-      <div>
-        ไทย
+    <div class="languages-list-wrapper">
+      <div class="languages-list">
+        <div class="language-row" @click="setLanguage('th')">
+          <div>
+            ไทย
+          </div>
+          <div class="flag"
+            :style="`background-image: url('${thaiFlagPath}')`"
+          ></div>
+        </div>
+        <div class="language-row" @click="setLanguage('en')">
+          <div>
+            English
+          </div>
+          <div class="flag"
+            :style="`background-image: url('${britishFlagPath}')`"
+          ></div>
+        </div>
+        <div class="language-row" @click="setLanguage('ru')">
+          <div>
+            Русский
+          </div>
+          <div class="flag"
+            :style="`background-image: url('${russianFlagPath}')`"
+          ></div>
+        </div>
       </div>
-      <div class="flag thailand-flag"></div>
-    </div>
-    <div class="language-row" @click="setLanguage('english')">
-      <div>
-        English
-      </div>
-      <div class="flag great-britain-flag"></div>
-    </div>
-    <div class="language-row" @click="setLanguage('russian')">
-      <div>
-        Русский
-      </div>
-      <div class="flag russia-flag"></div>
     </div>
   </div>
 </template>
 
 <script>
+
+import FlagsPaths from '~/settings/flags'
+import RouterSharedMethods from '~/shared_methods/router'
+
 export default {
 
   data() {
     return {
-      pageToReturn: null
+      pageToReturn: null,
+      thaiFlagPath: FlagsPaths.thai_flag_path,
+      britishFlagPath: FlagsPaths.british_flag_path,
+      russianFlagPath: FlagsPaths.russian_flag_path,
     }
   },
 
   mounted() {
-    this.pageToReturn = this.$store.state.language.pageToReturnAfterLanguageSelect
-    this.$store.dispatch('language/setPageToReturnAfterLanguageRequest', 'index')
+    this.pageToReturn = this.pageToReturnAfterLanguageSelect
+    this.$store.dispatch('language/setPageToReturnAfterLanguageSelect', 'index')
   },
 
   methods: {
 
     setLanguage(language) {
       this.$store.dispatch('language/setLanguage', language)
-      this.$router.push({name: this.$store.state.language.pageToReturnAfterLanguageSelect})
+      // RouterSharedMethods.goTo(this.pageToReturn)
+      this.$router.push({name: RouterSharedMethods.getRouteNameWithLocale(this.pageToReturn)})
     }
 
   },
+
+  computed: {
+    pageToReturnAfterLanguageSelect() {
+      return this.$store.state.language.pageToReturnAfterLanguageSelect
+    }
+  }
 
 }
 </script>
@@ -55,13 +79,12 @@ export default {
   align-items: center;
   justify-content: space-between;
 }
-.thailand-flag {
-  background-image: url('/images/flags/flag-thailand.png');
+.languages-list {
+  width: 350px;
 }
-.great-britain-flag {
-  background-image: url('/images/flags/flag-great-britain.png')
-}
-.russia-flag {
-  background-image: url('/images/flags/flag-russia.png');
+.languages-list-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>
