@@ -34,7 +34,6 @@
 <script>
 
 import FlagsPaths from '~/settings/flags'
-import RouterSharedMethods from '~/shared_methods/router'
 
 export default {
 
@@ -56,8 +55,7 @@ export default {
 
     setLanguage(language) {
       this.$store.dispatch('language/setLanguage', language)
-      // RouterSharedMethods.goTo(this.pageToReturn)
-      this.$router.push({name: RouterSharedMethods.getRouteNameWithLocale(this.pageToReturn)})
+      this.$store.dispatch('router/goTo', this.pageToReturn)
     }
 
   },

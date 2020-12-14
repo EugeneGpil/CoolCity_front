@@ -1,6 +1,6 @@
 export const state = () => ({
   pageToReturnAfterLanguageSelect: 'index',
-  language: 'thai',
+  language: 'th',
 })
 
 export const mutations = {
@@ -17,6 +17,7 @@ export const mutations = {
 }
 
 export const actions = {
+
   setPageToReturnAfterLanguageSelect(context, pageName) {
     context.commit('setPageToReturnAfterLanguageSelect', pageName)
   },
