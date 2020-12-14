@@ -1,9 +1,11 @@
 <template>
   <div>
-    <div class="product-cart">
-      <div class="product-image"></div>
-      <div class="product-info"></div>
-      <div class="button main-button"></div>
+    <div class="products-wrapper">
+      <div class="product-cart">
+        <div class="product-image"></div>
+        <div class="product-info"></div>
+        <div class="button main-button"></div>
+      </div>
     </div>
   </div>
 </template>
@@ -14,5 +16,8 @@
   border-style: solid;
   border-width: 2px;
   border-radius: 7px;
+}
+.products-wrapper {
+  margin-top: 10px;
 }
 </style>

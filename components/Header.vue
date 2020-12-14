@@ -18,6 +18,7 @@
 
 import FlagPaths from '~/settings/flags'
 import LocalStorageSharedMethods from '~/shared_methods/local_storage'
+import PageNames from '~/settings/pageNames'
 
 export default {
 
@@ -40,9 +41,13 @@ export default {
   methods: {
 
     goToLanguageSelect() {
+      if (this.currentPageName == PageNames.language_select) {
+        this.$store.dispatch('router/goTo', this.pageToReturnAfterLanguageSelect)
+        return
+      }
       this.$store.dispatch('language/setPageToReturnAfterLanguageSelect', 'index')
-      this.$store.dispatch('router/goTo', 'language_select')
-    }
+      this.$store.dispatch('router/goTo', PageNames.language_select)
+    },
 
   },
 
@@ -50,6 +55,14 @@ export default {
 
     language() {
       return this.$store.state.language.language
+    },
+
+    pageToReturnAfterLanguageSelect() {
+      return this.$store.state.language.pageToReturnAfterLanguageSelect
+    },
+
+    currentPageName() {
+      return this.$store.getters['router/currentPageName']
     },
 
   },
@@ -70,7 +83,7 @@ export default {
       }
 
       this.flag = flagPath
-    }
+    },
 
   },
 
