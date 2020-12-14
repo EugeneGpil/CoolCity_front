@@ -4,7 +4,7 @@
       <div class="logo">
         CoolCity
       </div>
-      <div class="language" @click.prevent="goToLanguageSelect()">
+      <div class="language" @click="goToLanguageSelect()">
         <div class="flag"
           :style="`background-image: url('${flag}')`"
         >
@@ -18,6 +18,7 @@
 
 import FlagPaths from '~/settings/flags'
 import LocalStorageSharedMethods from '~/shared_methods/local_storage'
+import PageNames from '~/settings/pageNames'
 
 export default {
 
@@ -40,12 +41,12 @@ export default {
   methods: {
 
     goToLanguageSelect() {
-      if (this.currentPageName == 'language_select') {
+      if (this.currentPageName == PageNames.language_select) {
         this.$store.dispatch('router/goTo', this.pageToReturnAfterLanguageSelect)
         return
       }
       this.$store.dispatch('language/setPageToReturnAfterLanguageSelect', 'index')
-      this.$store.dispatch('router/goTo', 'language_select')
+      this.$store.dispatch('router/goTo', PageNames.language_select)
     },
 
   },
