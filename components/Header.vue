@@ -4,7 +4,7 @@
       <div class="logo">
         CoolCity
       </div>
-      <div class="language" @click="goToLanguageSelect()">
+      <div class="language" @click.prevent="goToLanguageSelect()">
         <div class="flag"
           :style="`background-image: url('${flag}')`"
         >
@@ -40,9 +40,13 @@ export default {
   methods: {
 
     goToLanguageSelect() {
+      if (this.currentPageName == 'language_select') {
+        this.$store.dispatch('router/goTo', this.pageToReturnAfterLanguageSelect)
+        return
+      }
       this.$store.dispatch('language/setPageToReturnAfterLanguageSelect', 'index')
       this.$store.dispatch('router/goTo', 'language_select')
-    }
+    },
 
   },
 
@@ -50,6 +54,14 @@ export default {
 
     language() {
       return this.$store.state.language.language
+    },
+
+    pageToReturnAfterLanguageSelect() {
+      return this.$store.state.language.pageToReturnAfterLanguageSelect
+    },
+
+    currentPageName() {
+      return this.$store.getters['router/currentPageName']
     },
 
   },
@@ -70,7 +82,7 @@ export default {
       }
 
       this.flag = flagPath
-    }
+    },
 
   },
 

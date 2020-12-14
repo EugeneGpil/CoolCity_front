@@ -46,25 +46,22 @@ export default {
     }
   },
 
-  mounted() {
-    this.pageToReturn = this.pageToReturnAfterLanguageSelect
-    this.$store.dispatch('language/setPageToReturnAfterLanguageSelect', 'index')
-  },
-
   methods: {
 
     setLanguage(language) {
       this.$store.dispatch('language/setLanguage', language)
-      this.$store.dispatch('router/goTo', this.pageToReturn)
-    }
+      this.$store.dispatch('router/goTo', this.pageToReturnAfterLanguageSelect)
+    },
 
   },
 
   computed: {
+
     pageToReturnAfterLanguageSelect() {
       return this.$store.state.language.pageToReturnAfterLanguageSelect
-    }
-  }
+    },
+
+  },
 
 }
 </script>
