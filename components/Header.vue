@@ -90,7 +90,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .logo {
   font-family: 'Qwigley', cursive;
   font-size: 45px;
@@ -99,6 +99,9 @@ export default {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  @media screen and (min-width: $first-width-step) {
+    padding-right: 5px;
+  }
 }
 .flag {
   margin-left: 10px;
