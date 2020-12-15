@@ -1,0 +1,46 @@
+// width steps
+$first-width-step: 466px;
+$second-width-step: 896px;
+
+// colors
+$background: white;
+$main-button-background: linear-gradient(0deg, rgba(16,16,17,1) 0%, rgba(20,20,20,1) 79%, rgba(75,73,73,1) 100%);
+
+@font-face {
+  font-family: "Qwigley";
+  src: local("Qwigley"),
+    url(~assets/fonts/Qwigley/Qwigley-Regular.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Montserrat";
+  src: local("Montserrat"),
+    url(~assets/fonts/Montserrat/Montserrat-Regular.ttf) format("truetype");
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.flag {
+  width: 40px;
+  height: 32px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 2px;
+}
+.button {
+  font-size: 20px;
+  padding-top: 6px;
+  padding-bottom: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-radius: 5px;
+  text-transform: uppercase;
+}
+.main-button {
+  color: $background;
+  background: $main-button-background;
+}
