@@ -1,8 +1,10 @@
 <template>
   <div>
-    <div class="wrapper">
-      <Header />
-      <Nuxt />
+    <div class="wrapper-wrapper">
+      <div class="wrapper">
+        <Header />
+        <Nuxt />
+      </div>
     </div>
   </div>
 </template>
@@ -26,5 +28,11 @@ export default {
   margin-bottom: 20px;
   margin-left: 10px;
   margin-right: 10px;
+  max-width: 1291px;
+  width: 100%;
+}
+.wrapper-wrapper {
+  display: flex;
+  justify-content: center;
 }
 </style>

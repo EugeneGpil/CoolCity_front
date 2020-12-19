@@ -1,87 +1,18 @@
 <template>
   <div>
-    <div class="products-wrapper">
 
-      <div class="product-cart">
-        <img class="product-image" src='/product_images/1.jpg'>
+    <Loading v-if="loading" />
+
+    <div v-if="!loading" class="products-wrapper">
+
+      <div v-for="product in products" :key="product.id" class="product-cart">
+        <img class="product-image" :src="product.pictures[0].url">
         <div class="product-info">
           <div class="product-name">
-            Super long Product Name
+            {{ product.title }}
           </div>
           <div class="product-price">
-            200 <span class="currency">฿</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="product-cart">
-        <img class="product-image" src='/product_images/1.jpg'>
-        <div class="product-info">
-          <div class="product-name">
-            Super long Product Name
-          </div>
-          <div class="product-price">
-            200 <span class="currency">฿</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="product-cart">
-        <img class="product-image" src='/product_images/1.jpg'>
-        <div class="product-info">
-          <div class="product-name">
-            Super long Product Name
-          </div>
-          <div class="product-price">
-            200 <span class="currency">฿</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="product-cart">
-        <img class="product-image" src='/product_images/1.jpg'>
-        <div class="product-info">
-          <div class="product-name">
-            Super long Product Name
-          </div>
-          <div class="product-price">
-            200 <span class="currency">฿</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="product-cart">
-        <img class="product-image" src='/product_images/1.jpg'>
-        <div class="product-info">
-          <div class="product-name">
-            Super long Product Name
-          </div>
-          <div class="product-price">
-            200 <span class="currency">฿</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="product-cart">
-        <img class="product-image" src='/product_images/1.jpg'>
-        <div class="product-info">
-          <div class="product-name">
-            Super long Product Name
-          </div>
-          <div class="product-price">
-            200 <span class="currency">฿</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="product-cart">
-        <img class="product-image" src='/product_images/1.jpg'>
-        <div class="product-info">
-          <div class="product-name">
-            Super long Product Name
-          </div>
-          <div class="product-price">
-            200 <span class="currency">฿</span>
+            {{ product.sell_price }} <span class="currency">฿</span>
           </div>
         </div>
       </div>
@@ -89,6 +20,49 @@
     </div>
   </div>
 </template>
+
+<script>
+
+import Loading from '~/components/Loading'
+
+export default {
+
+  name: 'index',
+
+  components: {
+    Loading
+  },
+  
+  data() {
+    return {
+      loading: false,
+    }
+  },
+
+  async fetch() {
+    await this.getProducts()
+  },
+
+  methods: {
+
+    async getProducts() {
+      this.loading = true
+      await this.$store.dispatch('products/getProducts')
+      this.loading = false
+    }
+
+  },
+
+  computed: {
+
+    products() {
+      return this.$store.state.products.products
+    },
+
+  }
+
+}
+</script>
 
 <style scoped lang="scss">
 .product-cart {
@@ -107,7 +81,6 @@
   margin-top: 5px;
   display: flex;
   flex-wrap: wrap;
-  width: fit-content;
 }
 .products-wrapper .product-cart {
   @media screen and (min-width: $first-width-step) {
