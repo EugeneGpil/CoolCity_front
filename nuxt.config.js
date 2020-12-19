@@ -1,4 +1,11 @@
 export default {
+
+  server: {
+    port: 3000, // default: 3000
+    host: process.env.HOST, // default: localhost,
+    timing: false
+  },
+
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
     title: 'CoolCity',
@@ -20,6 +27,7 @@ export default {
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
+    {src: '~/plugins/vue-simple-spinner', mode: 'client'}
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -81,5 +89,10 @@ export default {
 
   styleResources: {
     scss: ['./assets/scss/*.scss']
+  },
+
+  env: {
+    apiUrl: process.env.API_URL,
+    baseUrl: process.env.BASE_URL
   },
 }

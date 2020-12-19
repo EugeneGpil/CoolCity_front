@@ -37,6 +37,8 @@ import FlagsPaths from '~/settings/flags'
 
 export default {
 
+  name: 'LanguageSelect',
+
   data() {
     return {
       pageToReturn: null,
