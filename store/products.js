@@ -12,6 +12,14 @@ export const mutations = {
     context.gotProductsAt = Date.now()
   },
 
+  addOneProduct(context, product) {
+    if (context.products) {
+      context.products = context.products.concat([product])
+    } else {
+      context.products = [product]
+    }
+  },
+
 }
 
 export const actions = {
@@ -23,5 +31,17 @@ export const actions = {
       })
     }
   },
+
+  addCurrentProduct(context) {
+    return ProductsService.getOneProduct(
+      this.app.router.history.current.params.id
+    ).then(response => {
+      context.commit('addOneProduct', response.data.payload[0])
+    })
+  }
+
+}
+
+export const getters = {
 
 }
