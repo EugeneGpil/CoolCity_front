@@ -41,11 +41,10 @@ export default {
   methods: {
 
     goToLanguageSelect() {
-      if (this.currentPageName == PageNames.language_select) {
-        this.$store.dispatch('router/goTo', this.pageToReturnAfterLanguageSelect)
+      if (this.currentPage.name == PageNames.language_select) {
+        this.$router.go(-1)
         return
       }
-      this.$store.dispatch('language/setPageToReturnAfterLanguageSelect', 'index')
       this.$store.dispatch('router/goTo', PageNames.language_select)
     },
 
@@ -57,12 +56,8 @@ export default {
       return this.$store.state.language.language
     },
 
-    pageToReturnAfterLanguageSelect() {
-      return this.$store.state.language.pageToReturnAfterLanguageSelect
-    },
-
-    currentPageName() {
-      return this.$store.getters['router/currentPageName']
+    currentPage() {
+      return this.$store.getters['router/currentPage']
     },
 
   },

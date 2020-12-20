@@ -1,13 +1,8 @@
 export const state = () => ({
-  pageToReturnAfterLanguageSelect: 'index',
   language: 'th',
 })
 
 export const mutations = {
-
-  setPageToReturnAfterLanguageSelect(context, pageName) {
-    context.pageToReturnAfterLanguageSelect = pageName
-  },
 
   setLanguage(context, language) {
     localStorage.setItem('selected_language', language)
@@ -17,10 +12,6 @@ export const mutations = {
 }
 
 export const actions = {
-
-  setPageToReturnAfterLanguageSelect(context, pageName) {
-    context.commit('setPageToReturnAfterLanguageSelect', pageName)
-  },
 
   setLanguage(context, language) {
     context.commit('setLanguage', language)

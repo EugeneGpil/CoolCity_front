@@ -12,6 +12,10 @@ export const mutations = {
     context.gotProductsAt = Date.now()
   },
 
+  addOneProduct(context, product) {
+    
+  },
+
 }
 
 export const actions = {
@@ -23,5 +27,27 @@ export const actions = {
       })
     }
   },
+
+  addOneProduct(context) {
+    return ProductsService.getOneProduct(id).then(response => {
+      context.commit('addOneProduct', response.data.payload)
+    })
+  }
+
+}
+
+export const getters = {
+
+  currentProduct(context) {
+    let productId = $nuxt._router.history.current.params.id
+
+    for (let i = 0; i < context.store.products.length; i++) {
+      if (context.store.products[i].id === productId) {
+        return context.store.products[i]
+      }
+    }
+
+    return null
+  }
 
 }

@@ -5,7 +5,12 @@
 
     <div v-if="!loading" class="products-wrapper">
 
-      <div v-for="product in products" :key="product.id" class="product-cart">
+      <div
+        v-for="product in products"
+        :key="product.id"
+        class="product-cart"
+        @click="goToProduct(product.id)"
+      >
         <img class="product-image" :src="product.pictures[0].url">
         <div class="product-info">
           <div class="product-name">
@@ -24,6 +29,7 @@
 <script>
 
 import Loading from '~/components/Loading'
+import PageNames from '~/settings/pageNames'
 
 export default {
 
@@ -49,7 +55,11 @@ export default {
       this.loading = true
       await this.$store.dispatch('products/getProducts')
       this.loading = false
-    }
+    },
+
+    goToProduct(id) {
+      this.$store.dispatch('router/goTo', {name: PageNames.product, params: {id}})
+    },
 
   },
 
@@ -70,6 +80,7 @@ export default {
   padding-bottom: 10px;
   display: flex;
   flex-direction: column;
+  cursor: pointer;
   max-width: 430px;
   @media screen and (min-width: $first-width-step) {
     padding-left: 5px;

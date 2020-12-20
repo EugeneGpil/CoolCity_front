@@ -52,15 +52,15 @@ export default {
 
     setLanguage(language) {
       this.$store.dispatch('language/setLanguage', language)
-      this.$store.dispatch('router/goTo', this.pageToReturnAfterLanguageSelect)
+      this.$store.dispatch('router/goTo', this.previousPage)
     },
 
   },
 
   computed: {
 
-    pageToReturnAfterLanguageSelect() {
-      return this.$store.state.language.pageToReturnAfterLanguageSelect
+    previousPage() {
+      return this.$store.state.router.previousPage
     },
 
   },

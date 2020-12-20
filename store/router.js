@@ -12,33 +12,60 @@ const getRouteNameWithLocale = (routeName) => {
 }
 
 export const state = () => ({
-  currentPageName: null
+  currentPage: null,
+  previousPage: null,
 })
 
 export const mutations = {
 
-  setCurrentPageName(context, currentPageName) {
-    context.currentPageName = currentPageName
-  }
+  setCurrentPage(context, currentPage) {
+    context.currentPage = currentPage
+  },
+
+  setPreviousPage(context, previousPage) {
+    context.previousPage = previousPage
+  },
 
 }
 
 export const actions = {
 
-  goTo(context, pageName) {
-    context.commit('setCurrentPageName', pageName)
+  goTo(context, toGoObjectOrString) {
+    if (toGoObjectOrString === null) {
+      return
+    }
+    let toGoObject = toGoObjectOrString
+    if (typeof toGoObjectOrString === 'string') {
+      toGoObject = {
+        name: toGoObjectOrString,
+      }
+    }
     this.app.router.push(
-      {name: getRouteNameWithLocale(pageName)}
+      {
+        name: getRouteNameWithLocale(toGoObject.name),
+        params: toGoObject.params
+      }
     )
+  },
+
+  setCurrentPage(context, currentPage) {
+    context.commit('setCurrentPage', currentPage)
+  },
+
+  setPreviousPage(context, previousPage) {
+    context.commit('setPreviousPage', previousPage)
   },
 
 }
 
 export const getters = {
 
-  currentPageName(state) {
-    return state.currentPageName
-      ?? $nuxt._router.history.current.name.substring(0, $nuxt._router.history.current.name.length - 5)
+  currentPage(state) {
+    return state.currentPage
+      ?? {
+        name: $nuxt._router.history.current.name.substring(0, $nuxt._router.history.current.name.length - 5),
+        params: $nuxt._router.history.current.params
+      }
   },
 
 }
