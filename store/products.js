@@ -13,7 +13,11 @@ export const mutations = {
   },
 
   addOneProduct(context, product) {
-    
+    if (context.products) {
+      context.products = context.products.concat([product])
+    } else {
+      context.products = [product]
+    }
   },
 
 }
@@ -28,26 +32,16 @@ export const actions = {
     }
   },
 
-  addOneProduct(context) {
-    return ProductsService.getOneProduct(id).then(response => {
-      context.commit('addOneProduct', response.data.payload)
+  addCurrentProduct(context) {
+    return ProductsService.getOneProduct(
+      this.app.router.history.current.params.id
+    ).then(response => {
+      context.commit('addOneProduct', response.data.payload[0])
     })
   }
 
 }
 
 export const getters = {
-
-  currentProduct(context) {
-    let productId = $nuxt._router.history.current.params.id
-
-    for (let i = 0; i < context.store.products.length; i++) {
-      if (context.store.products[i].id === productId) {
-        return context.store.products[i]
-      }
-    }
-
-    return null
-  }
 
 }

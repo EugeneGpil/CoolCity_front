@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="wrapper">
-      <div class="logo">
+      <div class="logo" @click="goToMain()">
         CoolCity
       </div>
       <div class="language" @click="goToLanguageSelect()">
@@ -48,6 +48,10 @@ export default {
       this.$store.dispatch('router/goTo', PageNames.language_select)
     },
 
+    goToMain() {
+      this.$store.dispatch('router/goTo', PageNames.main)
+    }
+
   },
 
   computed: {
@@ -89,6 +93,7 @@ export default {
 .logo {
   font-family: 'Qwigley', cursive;
   font-size: 45px;
+  cursor: pointer;
 }
 .wrapper {
   display: flex;

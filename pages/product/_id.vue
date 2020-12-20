@@ -1,5 +1,7 @@
 <template>
-  <div>Product</div>
+  <div>
+    {{ product ? product.id : ''}}
+  </div>
 </template>
 
 <script>
@@ -22,16 +24,24 @@ export default {
 
   async fetch() {
     this.loading = true
-    // if (currentProduct === null) {
-
-    // }
+    if (!this.product) {
+      await this.$store.dispatch('products/addCurrentProduct')
+    }
     this.loading = false
   },
 
   computed: {
 
-    currentProduct() {
-      return this.$store.state.products.getters.currentProduct
+    product() {
+      let productId = this.$router.history.current.params.id
+      let allProducts = this.$store.state.products.products
+      for (let i = 0; i < allProducts.length; i++) {
+        if (allProducts[i].id === parseInt(productId)) {
+          return allProducts[i]
+        }
+      }
+
+      return null
     },
 
   },
