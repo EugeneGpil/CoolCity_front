@@ -1,4 +1,5 @@
-import LocalStorageSharedMethods from '~/shared_methods/local_storage'
+import localStorageSharedMethods from '~/sharedMethods/localStorage'
+import routerSharedMethods from '~/sharedMethods/router'
 
 const generateRouteNameWithLocale = (routeName, locale) => {
   return `${routeName}___${locale ?? 'th'}`
@@ -7,7 +8,7 @@ const generateRouteNameWithLocale = (routeName, locale) => {
 const getRouteNameWithLocale = (routeName) => {
   return generateRouteNameWithLocale(
     routeName,
-    LocalStorageSharedMethods.getLanguage()
+    localStorageSharedMethods.getLanguage()
   )
 }
 
@@ -62,10 +63,9 @@ export const getters = {
 
   currentPage(state) {
     return state.currentPage
-      ?? {
-        name: $nuxt._router.history.current.name.substring(0, $nuxt._router.history.current.name.length - 5),
-        params: $nuxt._router.history.current.params
-      }
+      ?? routerSharedMethods.getPageInfoWithoutLanguage(
+        $nuxt._router.history.current
+      )
   },
 
 }
