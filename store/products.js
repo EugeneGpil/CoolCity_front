@@ -1,4 +1,4 @@
-import ProductsService from '~/services/ProductsService'
+import productsService from '~/services/productsService'
 
 export const state = () => ({
   products: [],
@@ -26,14 +26,14 @@ export const actions = {
 
   getProducts(context) {
     if (!context.gotProductsAt || Date.now() - context.gotProductsAt >= 5 * 60 * 1000) {
-      return ProductsService.getProducts().then(response => {
+      return productsService.getProducts().then(response => {
         context.commit('setProducts', response.data.payload)
       })
     }
   },
 
   addCurrentProduct(context) {
-    return ProductsService.getOneProduct(
+    return productsService.getOneProduct(
       this.app.router.history.current.params.id
     ).then(response => {
       context.commit('addOneProduct', response.data.payload[0])

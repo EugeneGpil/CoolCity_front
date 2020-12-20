@@ -29,7 +29,7 @@
 <script>
 
 import Loading from '~/components/Loading'
-import PageNames from '~/settings/pageNames'
+import pageNames from '~/settings/pageNames'
 
 export default {
 
@@ -58,7 +58,7 @@ export default {
     },
 
     goToProduct(id) {
-      this.$store.dispatch('router/goTo', {name: PageNames.product, params: {id}})
+      this.$store.dispatch('router/goTo', {name: pageNames.product, params: {id}})
     },
 
   },

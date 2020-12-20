@@ -33,7 +33,8 @@
 
 <script>
 
-import FlagsPaths from '~/settings/flags'
+import flagsPaths from '~/settings/flags'
+import pageNames from '~/settings/pageNames'
 
 export default {
 
@@ -42,9 +43,9 @@ export default {
   data() {
     return {
       pageToReturn: null,
-      thaiFlagPath: FlagsPaths.thai_flag_path,
-      britishFlagPath: FlagsPaths.british_flag_path,
-      russianFlagPath: FlagsPaths.russian_flag_path,
+      thaiFlagPath: flagsPaths.thai_flag_path,
+      britishFlagPath: flagsPaths.british_flag_path,
+      russianFlagPath: flagsPaths.russian_flag_path,
     }
   },
 
@@ -52,7 +53,7 @@ export default {
 
     setLanguage(language) {
       this.$store.dispatch('language/setLanguage', language)
-      this.$store.dispatch('router/goTo', this.previousPage)
+      this.$store.dispatch('router/goTo', this.previousPage ?? pageNames.main)
     },
 
   },

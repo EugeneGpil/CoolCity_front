@@ -16,20 +16,20 @@
 
 <script>
 
-import FlagPaths from '~/settings/flags'
-import LocalStorageSharedMethods from '~/shared_methods/local_storage'
-import PageNames from '~/settings/pageNames'
+import flagPaths from '~/settings/flags'
+import localStorageSharedMethods from '~/sharedMethods/localStorage'
+import pageNames from '~/settings/pageNames'
 
 export default {
 
   data() {
     return {
-      flag: FlagPaths.thai_flag_path,
+      flag: flagPaths.thai_flag_path,
     }
   },
   
   mounted() {
-    const selectedLanguage = LocalStorageSharedMethods.getLanguage()
+    const selectedLanguage = localStorageSharedMethods.getLanguage()
     if (!selectedLanguage) {
       this.goToLanguageSelect()
       return;
@@ -41,15 +41,15 @@ export default {
   methods: {
 
     goToLanguageSelect() {
-      if (this.currentPage.name == PageNames.language_select) {
+      if (this.currentPage.name === pageNames.language_select) {
         this.$router.go(-1)
         return
       }
-      this.$store.dispatch('router/goTo', PageNames.language_select)
+      this.$store.dispatch('router/goTo', pageNames.language_select)
     },
 
     goToMain() {
-      this.$store.dispatch('router/goTo', PageNames.main)
+      this.$store.dispatch('router/goTo', pageNames.main)
     }
 
   },
@@ -69,16 +69,16 @@ export default {
   watch: {
 
     language() {
-      let flagPath = FlagPaths.thai_flag_path
+      let flagPath = flagPaths.thai_flag_path
 
       if (this.language == 'th') {
-        flagPath = FlagPaths.thai_flag_path
+        flagPath = flagPaths.thai_flag_path
 
       } else if (this.language == 'en') {
-        flagPath = FlagPaths.british_flag_path
+        flagPath = flagPaths.british_flag_path
 
       } else if (this.language == 'ru') {
-        flagPath = FlagPaths.russian_flag_path
+        flagPath = flagPaths.russian_flag_path
       }
 
       this.flag = flagPath
