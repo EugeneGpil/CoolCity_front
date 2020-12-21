@@ -5,6 +5,11 @@ $second-width-step: 896px;
 // colors
 $background: white;
 $main-button-background: linear-gradient(0deg, rgba(16,16,17,1) 0%, rgba(20,20,20,1) 79%, rgba(75,73,73,1) 100%);
+$red-button-background: rgb(228, 20, 20);
+$white-button-background: rgb(226, 224, 224);
+$black-button-background: rgb(28, 28, 28);
+$unavailable-color: rgb(230, 230, 230);
+$unavailable-solid-color: rgb(157, 155, 155);
 
 @font-face {
   font-family: "Qwigley";
@@ -43,4 +48,13 @@ $main-button-background: linear-gradient(0deg, rgba(16,16,17,1) 0%, rgba(20,20,2
 .main-button {
   color: $background;
   background: $main-button-background;
+}
+.product-title {
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: 1px;
+  line-height: 1.4;
+  font-weight: 700;
 }

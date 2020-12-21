@@ -13,10 +13,10 @@
       >
         <img class="product-image" :src="product.pictures[0].url">
         <div class="product-info">
-          <div class="product-name">
+          <div class="product-title">
             {{ product.title }}
           </div>
-          <div class="product-price">
+          <div class="product-title">
             {{ product.sell_price }} <span class="currency">฿</span>
           </div>
         </div>
@@ -110,21 +110,12 @@ export default {
   padding-bottom: 10px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  font-size: 12px;
-  font-weight: 700;
-  font-family: 'Montserrat', sans-serif;
-  letter-spacing: 1px;
-  line-height: 1.4;
-  text-transform: uppercase;
-}
-.product-name {
-  text-align: center;
 }
 .currency {
   font-weight: 500;
 }
 .product-price {
   margin-top: 10px;
+  text-align: center;
 }
 </style>
