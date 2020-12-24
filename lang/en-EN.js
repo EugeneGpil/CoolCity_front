@@ -1,3 +1,4 @@
 export default {
-  hello: 'hello',
+  color: 'color',
+  size: 'size',
 }

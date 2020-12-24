@@ -1,3 +1,4 @@
 export default {
-  hello: 'สวัสดี',
+  color: 'สี',
+  size: 'ขนาด',
 }

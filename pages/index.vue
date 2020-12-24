@@ -9,7 +9,7 @@
         v-for="product in products"
         :key="product.id"
         class="product-cart"
-        @click="goToProduct(product.id)"
+        @click="goToProduct(product.product_id, product.id)"
       >
         <img class="product-image" :src="product.pictures[0].url">
         <div class="product-info">
@@ -57,8 +57,9 @@ export default {
       this.loading = false
     },
 
-    goToProduct(id) {
-      this.$store.dispatch('router/goTo', {name: pageNames.product, params: {id}})
+    goToProduct(productId, positionId) {
+      this.$store.dispatch('products/setSelectedPositionId', positionId)
+      this.$store.dispatch('router/goTo', {name: pageNames.product, params: {id: productId}})
     },
 
   },

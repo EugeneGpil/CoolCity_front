@@ -6,10 +6,13 @@ $second-width-step: 896px;
 $background: white;
 $main-button-background: linear-gradient(0deg, rgba(16,16,17,1) 0%, rgba(20,20,20,1) 79%, rgba(75,73,73,1) 100%);
 $red-button-background: rgb(228, 20, 20);
-$white-button-background: rgb(226, 224, 224);
+$white-button-background: rgb(243, 243, 243);
 $black-button-background: rgb(28, 28, 28);
+$grey-button-background: rgb(228, 227, 227);
+$blue-button-background: rgb(10, 10, 199);
+$pink-button-background: rgb(235, 107, 128);
 $unavailable-color: rgb(230, 230, 230);
-$unavailable-solid-color: rgb(157, 155, 155);
+$unavailable-solid-color: rgb(212, 211, 211);
 
 @font-face {
   font-family: "Qwigley";

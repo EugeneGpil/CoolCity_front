@@ -1,15 +1,20 @@
 <template>
   <div>
-    <div class="wrapper">
+
+    <Loading v-if="loading" />
+
+    <div v-if="!loading" class="wrapper">
       <div class="product-cart">
         <div class="images-container">
           <div class="main-image-container">
             <div class="image-main-container">
               <div class="image-subcontainer">
                 <div class="image"
-                  :style="`background-image: url('/product_images/1/red/1.jpeg')`"
+                  :style="`background-image: url('${getSelectedPositionPictureUrl()}')`"
                 >
-                  <div class="in-image-arrows-container">
+                  <div class="in-image-arrows-container"
+                    :class="{hidden: !areArrowsVisible}"
+                  >
                     <font-awesome-icon class="arrow left-arrow" icon="caret-left" />
                     <font-awesome-icon class="arrow right-arrow" icon="caret-right" />
                   </div>
@@ -20,49 +25,38 @@
         </div>
         <div class="product-info">
           <h1 class="product-title">
-            super product long or even much longer title
+            {{ getSelectedPositionAttrubute('title') }}
           </h1>
-          <div class="size-container">
-            <div class="size-title product-title">
-              size
+          <div class="color-container">
+            <div class="color-title product-title">
+              {{ $t('color') }}
             </div>
-            <div class="size-selector">
-              <div class="size product-title unavailable-size">
-                s
-              </div>
-              <div class="size product-title selected-size">
-                m
-              </div>
-              <div class="size product-title">
-                xl
+            <div class="color-selector">
+              <div v-for="productColor in allProductColors">
+                <div class="color-container" @click="setPositionIdByColor(productColor)">
+                  <div class="color">
+                    <div :class="`subcolor subcolor-${productColor.first_color}`" />
+                    <div :class="`subcolor subcolor-${getSecondColor(productColor)}`" />
+                  </div>
+                  <div
+                    class="color-fog"
+                    :class="{'selected-color-fog': isColorSelected(productColor)}"
+                  />
+                </div>
               </div>
             </div>
           </div>
-          <div class="color-container">
-            <div class="color-title product-title">
-              color
+          <div class="size-container">
+            <div class="size-title product-title">
+              {{ $t('size') }}
             </div>
-            <div class="color-selector">
-              <div class="color-container">
-                <div class="color">
-                  <div class="subcolor subcolor-red" />
-                  <div class="subcolor subcolor-red" />
-                </div>
-                <div class="color-fog selected-color-fog" />
-              </div>
-              <div class="color-container">
-                <div class="color">
-                  <div class="subcolor subcolor-white" />
-                  <div class="subcolor subcolor-white" />
-                </div>
-                <div class="color-fog" />
-              </div>
-              <div class="color-container">
-                <div class="color">
-                  <div class="subcolor subcolor-black" />
-                  <div class="subcolor subcolor-black" />
-                </div>
-                <div class="color-fog" />
+            <div class="size-selector">
+              <div
+                v-for="size in allSizesByColor"
+                class="size product-title"
+                :class="{'selected-size': isSizeSelected(size)}"
+              >
+                {{ size }}
               </div>
             </div>
           </div>
@@ -71,7 +65,7 @@
       <div class="buy-container">
         <div class="price-container">
           <div class="price product-title">
-            165 <span class="currency">฿</span>
+            {{ getSelectedPositionAttrubute('sell_price') }} <span class="currency">฿</span>
           </div>
         </div>
         <div class="button main-button">
@@ -85,6 +79,7 @@
 <script>
 
 import Loading from '~/components/Loading'
+import productsService from '~/services/productsService'
 
 export default {
 
@@ -93,6 +88,12 @@ export default {
   data() {
     return {
       loading: false,
+      positions: [],
+      selectedPositionId: null,
+      selectedPosition: null,
+      allProductColors: [],
+      areArrowsVisible: false,
+      allSizesByColor: [],
     }
   },
 
@@ -102,26 +103,217 @@ export default {
 
   async fetch() {
     this.loading = true
-    if (!this.product) {
-      await this.$store.dispatch('products/addCurrentProduct')
-    }
+
+      this.positions = (await productsService.getPositionsByProduct(
+        this.$router.currentRoute.params.id
+      )).data.payload
+
+      this.selectedPositionId = this.previouslySelectedPositionId ?? 0;
+
     this.loading = false
   },
 
   computed: {
 
-    product() {
-      let productId = this.$router.history.current.params.id
-      let allProducts = this.$store.state.products.products
-      for (let i = 0; i < allProducts.length; i++) {
-        if (allProducts[i].id === parseInt(productId)) {
-          return allProducts[i]
+    previouslySelectedPositionId() {
+      return this.$store.state.products.selectedPositionId
+    },
+
+  },
+
+  watch: {
+
+    selectedPositionId() {
+      this.setSelectedPosition()
+      this.setAreArrowsVisible()
+      this.setAllProductColors()
+      this.setAllSizesByColor()
+    },
+
+  },
+
+  methods: {
+
+    getSelectedPositionPictureUrl() {
+      if (this.selectedPosition === null) {
+        return ''
+      }
+      return this.selectedPosition.pictures[0].url
+    },
+
+    getSelectedPositionAttrubute(attributeName) {
+      if (this.selectedPosition === null) {
+        return ''
+      }
+      return this.selectedPosition[attributeName]
+    },
+
+    setAllProductColors() {
+
+      if (this.selectedPosition === null) {
+        this.allProductColors = []
+        return
+      }
+
+      let allProductColors = []
+
+      for (let i = 0; i < this.positions.length; i++) {
+
+        let currentPosition = this.positions[i]
+
+        let positionColor = {
+          first_color: currentPosition.first_color,
+          second_color: null,
+        }
+        if (
+          currentPosition.second_color !== null
+          && currentPosition.second_color !== currentPosition.first_color
+        ) {
+          positionColor.second_color = currentPosition.second_color
+        }
+
+        let isColorAlreadyInArray = false;
+        for (let j = 0; j < allProductColors.length; j++) {
+          let currentColor = allProductColors[j]
+          if (
+            positionColor.first_color === currentColor.first_color
+            && positionColor.second_color === currentColor.second_color
+          ) {
+            isColorAlreadyInArray = true;
+            break
+          }
+        }
+
+        if (!isColorAlreadyInArray) {
+          allProductColors.push(positionColor)
         }
       }
 
-      return null
+      this.allProductColors = allProductColors
     },
 
+    isColorSelected(colorObject) {
+      if (this.selectedPosition === null) {
+        return false
+      }
+
+      return this.areColorsEqual(colorObject, this.selectedPosition)
+    },
+
+    areColorsEqual(colorObject1, colorObject2) {
+      if (colorObject1.first_color !== colorObject2.first_color) {
+        return false
+      }
+      if (colorObject1.second_color === colorObject2.second_color) {
+        return true
+      }
+      if (
+        colorObject1.second_color !== null
+        && colorObject2.second_color === null
+        && colorObject1.second_color === colorObject2.first_color
+      ) {
+        return true
+      }
+      if (
+        colorObject2.second_color !== null
+        && colorObject1.second_color === null
+        && colorObject2.second_color === colorObject1.first_color
+      ) {
+        return true
+      }
+      return false
+    },
+
+    getSecondColor(colorObject) {
+      if (colorObject.second_color === null) {
+        return colorObject.first_color
+      }
+      return colorObject.second_color
+    },
+
+    setAreArrowsVisible() {
+      if (this.selectedPosition !== null && this.selectedPosition.pictures.length <= 1) {
+        this.areArrowsVisible = false
+        return
+      }
+      this.areArrowsVisible = true
+    },
+
+    setSelectedPosition() {
+      for (let i = 0; i < this.positions.length; i++) {
+        if (this.positions[i].id == this.selectedPositionId || this.selectedPositionId === 0) {
+          this.selectedPosition = this.positions[i]
+          return
+        }
+      }
+    },
+
+    setAllSizesByColor() {
+
+      if (this.selectedPosition === null) {
+        this.allSizesByColor = []
+        return
+      }
+
+      let allSizesByColor = []
+
+      for (let i = 0; i < this.positions.length; i++) {
+
+        let currentPosition = this.positions[i]
+
+        if (!this.areColorsEqual(this.selectedPosition, currentPosition)) {
+          continue
+        }
+
+        let isSizeAlreadyInArray = false
+
+        for (let j = 0; j < allSizesByColor.length; j++) {
+
+          let currentSizeByColor = allSizesByColor[j]
+
+          if (currentSizeByColor === currentPosition.size) {
+            isSizeAlreadyInArray = true
+            break
+          }
+
+        }
+
+        if (!isSizeAlreadyInArray) {
+          allSizesByColor.push(currentPosition.size)
+        }
+      }
+
+      this.allSizesByColor = allSizesByColor
+
+    },
+
+    isSizeSelected(size) {
+      if (this.selectedPosition === null) {
+        return false
+      }
+
+      if (this.selectedPosition.size === size) {
+        return true
+      }
+      return false
+    },
+
+    setPositionIdByColor(colorObject) {
+      if (this.areColorsEqual(colorObject, this.selectedPosition)) {
+        return
+      }
+
+      for (let i = 0; i < this.positions.length; i++) {
+
+        let currentPosition = this.positions[i]
+
+        if (this.areColorsEqual(colorObject, currentPosition)) {
+          this.selectedPositionId = currentPosition.id
+          return
+        }
+
+      }
+    },
   },
 
 }
@@ -234,6 +426,15 @@ $first-width-step: 600px;
 .subcolor-black {
   background-color: $black-button-background;
 }
+.subcolor-grey {
+  background-color: $grey-button-background;
+}
+.subcolor-pink {
+  background-color: $pink-button-background;
+}
+.subcolor-blue {
+  background-color: $blue-button-background;
+}
 .selected-color {
   cursor: default;
 }
@@ -290,5 +491,8 @@ $first-width-step: 600px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.hidden {
+  display: none;
 }
 </style>
