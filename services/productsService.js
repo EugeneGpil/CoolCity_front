@@ -8,6 +8,10 @@ export default {
 
   getOneProduct(id) {
     return apiClient.get(`/position/${id}`)
-  }
+  },
+
+  getPositionsByProduct(id) {
+    return apiClient.get(`product/${id}/positions`)
+  },
 
 }

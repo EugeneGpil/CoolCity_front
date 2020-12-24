@@ -2,7 +2,8 @@ import productsService from '~/services/productsService'
 
 export const state = () => ({
   products: [],
-  gotProductsAt: null
+  gotProductsAt: null,
+  selectedPositionId: null,
 })
 
 export const mutations = {
@@ -12,13 +13,9 @@ export const mutations = {
     context.gotProductsAt = Date.now()
   },
 
-  addOneProduct(context, product) {
-    if (context.products) {
-      context.products = context.products.concat([product])
-    } else {
-      context.products = [product]
-    }
-  },
+  setSelectedPositionId(context, selectedPositionId) {
+    context.selectedPositionId = selectedPositionId
+  }
 
 }
 
@@ -32,12 +29,8 @@ export const actions = {
     }
   },
 
-  addCurrentProduct(context) {
-    return productsService.getOneProduct(
-      this.app.router.history.current.params.id
-    ).then(response => {
-      context.commit('addOneProduct', response.data.payload[0])
-    })
+  setSelectedPositionId(context, selectedPositionId) {
+    context.commit('setSelectedPositionId', selectedPositionId)
   }
 
 }

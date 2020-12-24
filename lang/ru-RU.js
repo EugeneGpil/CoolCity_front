@@ -1,3 +1,4 @@
 export default {
-  hello: 'привет',
+  color: 'цвет',
+  size: 'размер',
 }
