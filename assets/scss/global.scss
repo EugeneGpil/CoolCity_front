@@ -2,6 +2,8 @@
 $first-width-step: 466px;
 $second-width-step: 896px;
 
+$product-page-first-width-step: 600px;
+
 // colors
 $background: white;
 $main-button-background: linear-gradient(0deg, rgba(16,16,17,1) 0%, rgba(20,20,20,1) 79%, rgba(75,73,73,1) 100%);
@@ -47,6 +49,8 @@ $unavailable-solid-color: rgb(212, 211, 211);
   padding-right: 15px;
   border-radius: 5px;
   text-transform: uppercase;
+  cursor: pointer;
+  width: fit-content;
 }
 .main-button {
   color: $background;
@@ -60,4 +64,84 @@ $unavailable-solid-color: rgb(212, 211, 211);
   letter-spacing: 1px;
   line-height: 1.4;
   font-weight: 700;
+}
+.main-image-container {
+  display: flex;
+  align-items: center;
+}
+.image-main-container {
+  flex: 1;
+}
+.image-subcontainer {
+  position: relative;
+  height: 0;
+  border: none;
+  padding-top: 100%;
+}
+.image {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: $unavailable-color;
+}
+.images-container {
+  @media screen and (min-width: $product-page-first-width-step) {
+    min-width: 300px;
+    max-width: 600px;
+    flex: 1;
+  }
+}
+.size {
+  font-size: 25px;
+  background-color: $unavailable-color;
+  width: 60px;
+  border-radius: 7px;
+  margin: 3px;
+  cursor: pointer;
+}
+.selected-size {
+  background-color: $red-button-background;
+  cursor: default;
+}
+.color {
+  width: 60px;
+  height: 35px;
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  cursor: pointer;
+}
+.subcolor {
+  flex: 1;
+  width: 100%;
+}
+.subcolor-red {
+  background-color: $red-button-background;
+}
+.subcolor-white {
+  background-color: $white-button-background;
+}
+.subcolor-black {
+  background-color: $black-button-background;
+}
+.subcolor-grey {
+  background-color: $grey-button-background;
+}
+.subcolor-pink {
+  background-color: $pink-button-background;
+}
+.subcolor-blue {
+  background-color: $blue-button-background;
+}
+.color-container {
+  position: relative;
+  border-radius: 7px;
+  overflow: hidden;
+  margin: 3px;
 }

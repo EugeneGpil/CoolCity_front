@@ -4,6 +4,7 @@ export const state = () => ({
   products: [],
   gotProductsAt: null,
   selectedPositionId: null,
+  selectedPosition: {},
 })
 
 export const mutations = {
@@ -15,7 +16,11 @@ export const mutations = {
 
   setSelectedPositionId(context, selectedPositionId) {
     context.selectedPositionId = selectedPositionId
-  }
+  },
+
+  setSelectedPosition(context, selectedPosition) {
+    context.selectedPosition = selectedPosition
+  },
 
 }
 
@@ -31,7 +36,11 @@ export const actions = {
 
   setSelectedPositionId(context, selectedPositionId) {
     context.commit('setSelectedPositionId', selectedPositionId)
-  }
+  },
+
+  setSelectedPosition(context, selectedPosition) {
+    context.commit('setSelectedPosition', selectedPosition)
+  },
 
 }
 
