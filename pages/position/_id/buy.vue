@@ -1,0 +1,283 @@
+<template>
+  <div>
+
+    <Loading v-if="loading" />
+
+    <div v-if="!loading" class="wrapper">
+      <div class="page-wrapper">
+
+        <h1 class="product-title page-title">
+          You want to buy
+        </h1>
+
+        <div class="card-wrapper">
+
+          <div class="product-info">
+            
+            <div class="images-container">
+              <div class="main-image-container">
+                <div class="image-main-container">
+                  <div class="image-subcontainer">
+                    <div class="image"
+                      :style="`background-image: url('/product_images/1/red/1.jpeg')`"
+                    >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="product-title product-name">
+              long or even longer product title
+            </div>
+
+            <div class="product-options">
+
+              <div class="product-title size selected-size">M</div>
+
+              <div class="color-container">
+                <div class="color">
+                  <div :class="`subcolor subcolor-white`" />
+                  <div :class="`subcolor subcolor-pink`" />
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="user-info">
+            
+            <div class="form">
+              <div class="labels-container">
+                <div class="input-title-container">
+                  <div class="input-title product-title">name:</div>
+                </div>
+                <div class="input-title-container">
+                  <div class="input-title product-title">phone:</div>
+                </div>
+                <div class="input-title-container">
+                  <div class="input-title product-title">postcode:</div>
+                </div>
+              </div>
+
+              <div class="inputs-container">
+                <input class="input product-title" :placeholder="'Michael Jackson'">
+                <div class="phone-input-container">
+                  <div class="phone-code product-title">+66</div>
+                  <input class="input product-title" :placeholder="112223344" type="number">
+                </div>
+                <input class="input product-title" :placeholder="'52431'">
+              </div>
+            </div>
+
+            <div class="form">
+              <div class="labels-container">
+                <div class="input-title-container">
+                  <div class="input-title product-title">address:</div>
+                </div>
+              </div>
+              <div class="inputs-container">
+                <textarea class="product-title textarea input" rows="4" cols="1">Thailand</textarea>
+              </div>
+            </div>
+
+            <div class="form">
+              <div class="labels-container">
+                <div class="input-title-container">
+                  <div class="input-title product-title">email:</div>
+                </div>
+                <div class="input-title-container">
+                  <div class="input-title product-title">facebook:</div>
+                </div>
+                <div class="input-title-container">
+                  <div class="input-title product-title">line:</div>
+                </div>
+                <div class="input-title-container">
+                  <div class="input-title product-title">whatsapp:</div>
+                </div>
+                <div class="input-title-container">
+                  <div class="input-title product-title">telegram:</div>
+                </div>
+                <div class="input-title-container">
+                  <div class="input-title product-title">vk:</div>
+                </div>
+              </div>
+              <div class="inputs-container">
+                <input class="input product-title" :placeholder="'box@mail.com'">
+                <input class="input product-title" :placeholder="'web.facebook.com/'">
+                <input class="input product-title" :placeholder="'+66112223344'">
+                <input class="input product-title" :placeholder="'+66112223344'">
+                <input class="input product-title" :placeholder="'+66112223344'">
+                <input class="input product-title" :placeholder="'vk.com/id654321'">
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="button main-button">
+          send
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</template>
+
+<script>
+
+import Loading from '~/components/Loading'
+import productsService from '~/services/productsService'
+
+export default {
+    
+  name: 'buy',
+
+  data() {
+    return {
+      loading: false,
+    }
+  },
+
+  components: {
+    Loading,
+  },
+
+  async fetch() {
+    this.loading = true
+
+    if (this.selectedPosition.id !== this.$router.currentRoute.params.id) {
+      this.$store.dispatch(
+        'products/setSelectedPosition',
+        (await productsService.getOnePosition(this.$router.currentRoute.params.id)).data.payload[0]
+      )
+    }
+
+    this.loading = false
+  },
+
+  computed: {
+
+    selectedPosition() {
+      return this.$store.state.products.selectedPosition
+    }
+
+  }
+
+}
+</script>
+
+<style scoped lang="scss">
+.page-title {
+  font-size: 17px;
+}
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.images-container {
+  max-width: 600px;
+  flex: 1;
+  width: 100%;
+}
+.card-wrapper {
+  width: 100%;
+}
+.product-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 600px;
+}
+.product-name {
+  margin-top: 15px;
+}
+.product-options {
+  margin-top: 5px;
+  display: flex;
+  width: fit-content;
+}
+.color {
+  cursor: default;
+}
+.card-wrapper {
+  @media screen and (min-width: 600px) {
+    display: flex;
+  }
+}
+.user-info {
+  margin-top: 15px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.form {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+}
+.phone-input-container {
+  display: flex;
+  align-items: center;
+}
+.input-title-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 22px;
+  margin-bottom: 5px;
+}
+.input {
+  width: 100%;
+  margin-bottom: 5px;
+  text-align: left;
+}
+.inputs-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.phone-code {
+  margin-bottom: 5px;
+  margin-right: 2px;
+}
+.labels-container {
+  padding-right: 5px;
+  flex: 0.65;
+  @media screen and (min-width: 350px) {
+    flex: 0.5;
+  }
+  @media screen and (min-width: 450px) {
+    flex: 0.35;
+  }
+  @media screen and (min-width: 600px) {
+    flex: 0.65;
+  }
+  @media screen and (min-width: 750px) {
+    flex: 0.5;
+  }
+  @media screen and (min-width: 900px) {
+    flex: 0.35;
+  }
+  @media screen and (min-width: 1000px) {
+    flex: 0.3;
+  }
+}
+.textarea {
+  flex: 1;
+  text-align: left;
+}
+.main-button {
+  margin-top: 10px;
+}
+</style>

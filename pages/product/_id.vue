@@ -68,7 +68,7 @@
             {{ getSelectedPositionAttrubute('sell_price') }} <span class="currency">฿</span>
           </div>
         </div>
-        <div class="button main-button">
+        <div class="button main-button" @click="goToBuy()">
           buy
         </div>
       </div>
@@ -80,6 +80,7 @@
 
 import Loading from '~/components/Loading'
 import productsService from '~/services/productsService'
+import pageNames from '~/settings/pageNames'
 
 export default {
 
@@ -89,8 +90,6 @@ export default {
     return {
       loading: false,
       positions: [],
-      selectedPositionId: null,
-      selectedPosition: null,
       allProductColors: [],
       areArrowsVisible: false,
       allSizesByColor: [],
@@ -108,15 +107,19 @@ export default {
         this.$router.currentRoute.params.id
       )).data.payload
 
-      this.selectedPositionId = this.previouslySelectedPositionId ?? 0;
+      this.setAllDataBySelectedPositionId()
 
     this.loading = false
   },
 
   computed: {
 
-    previouslySelectedPositionId() {
-      return this.$store.state.products.selectedPositionId
+    selectedPositionId() {
+      return this.$store.state.products.selectedPositionId ?? 0
+    },
+
+    selectedPosition() {
+      return this.$store.state.products.selectedPosition
     },
 
   },
@@ -124,15 +127,19 @@ export default {
   watch: {
 
     selectedPositionId() {
-      this.setSelectedPosition()
-      this.setAreArrowsVisible()
-      this.setAllProductColors()
-      this.setAllSizesByColor()
+      this.setAllDataBySelectedPositionId()
     },
 
   },
 
   methods: {
+
+    setAllDataBySelectedPositionId() {
+      this.setSelectedPosition()
+      this.setAreArrowsVisible()
+      this.setAllProductColors()
+      this.setAllSizesByColor()
+    },
 
     getSelectedPositionPictureUrl() {
       if (this.selectedPosition === null) {
@@ -242,9 +249,12 @@ export default {
     setSelectedPosition() {
       for (let i = 0; i < this.positions.length; i++) {
         if (this.positions[i].id == this.selectedPositionId || this.selectedPositionId === 0) {
-          this.selectedPosition = this.positions[i]
+          this.$store.dispatch('products/setSelectedPosition', this.positions[i])
           return
         }
+      }
+      if (this.positions.length) {
+        this.$store.dispatch('products/setSelectedPositionId', this.positions[0].id)
       }
     },
 
@@ -308,44 +318,24 @@ export default {
         let currentPosition = this.positions[i]
 
         if (this.areColorsEqual(colorObject, currentPosition)) {
-          this.selectedPositionId = currentPosition.id
+          this.$store.dispatch('products/setSelectedPositionId', currentPosition.id)
           return
         }
 
       }
     },
+
+    goToBuy() {
+      this.$store.dispatch('router/goTo', {name: pageNames.position_buy, params: {id: this.selectedPositionId}})
+    },
+
   },
 
 }
 </script>
 
 <style scoped lang="scss">
-$first-width-step: 600px;
 
-.main-image-container {
-  display: flex;
-  align-items: center;
-}
-.image-main-container {
-  flex: 1;
-}
-.image-subcontainer {
-  position: relative;
-  height: 0;
-  border: none;
-  padding-top: 100%;
-}
-.image {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: $unavailable-color;
-}
 .arrow {
   font-size: 54px;
   padding-left: 5px;
@@ -381,20 +371,8 @@ $first-width-step: 600px;
 .size-title {
   font-size: 10px;
 }
-.size {
-  font-size: 25px;
-  background-color: $unavailable-color;
-  width: 60px;
-  border-radius: 7px;
-  margin: 3px;
-  cursor: pointer;
-}
 .unavailable-size {
   color: $unavailable-solid-color;
-  cursor: default;
-}
-.selected-size {
-  background-color: $red-button-background;
   cursor: default;
 }
 .color-title {
@@ -404,45 +382,8 @@ $first-width-step: 600px;
   display: flex;
   justify-content: center;
 }
-.color {
-  width: 60px;
-  height: 35px;
-  border-radius: 7px;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  cursor: pointer;
-}
-.subcolor {
-  flex: 1;
-  width: 100%;
-}
-.subcolor-red {
-  background-color: $red-button-background;
-}
-.subcolor-white {
-  background-color: $white-button-background;
-}
-.subcolor-black {
-  background-color: $black-button-background;
-}
-.subcolor-grey {
-  background-color: $grey-button-background;
-}
-.subcolor-pink {
-  background-color: $pink-button-background;
-}
-.subcolor-blue {
-  background-color: $blue-button-background;
-}
 .selected-color {
   cursor: default;
-}
-.color-container {
-  position: relative;
-  border-radius: 7px;
-  overflow: hidden;
-  margin: 3px;
 }
 .color-fog {
   position: absolute;
@@ -474,15 +415,8 @@ $first-width-step: 600px;
   margin-right: 10px;
 }
 .product-cart {
-  @media screen and (min-width: $first-width-step) {
+  @media screen and (min-width: $product-page-first-width-step) {
     display: flex;
-  }
-}
-.images-container {
-  @media screen and (min-width: $first-width-step) {
-    min-width: 300px;
-    max-width: 600px;
-    flex: 1;
   }
 }
 .product-info {
