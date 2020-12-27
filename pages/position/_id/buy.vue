@@ -7,7 +7,7 @@
       <div class="page-wrapper">
 
         <h1 class="product-title page-title">
-          You want to buy
+          {{ $t('you_want_to_buy') }}
         </h1>
 
         <div class="card-wrapper">
@@ -19,7 +19,7 @@
                 <div class="image-main-container">
                   <div class="image-subcontainer">
                     <div class="image"
-                      :style="`background-image: url('/product_images/1/red/1.jpeg')`"
+                      :style="`background-image: url('${getSelectedPositionFirstPictureUrl(selectedPosition)}')`"
                     >
                     </div>
                   </div>
@@ -28,17 +28,19 @@
             </div>
 
             <div class="product-title product-name">
-              long or even longer product title
+              {{ getSelectedPositionAttribute(selectedPosition, 'title') }}
             </div>
 
             <div class="product-options">
 
-              <div class="product-title size selected-size">M</div>
+              <div class="product-title size selected-size">
+                {{ getSelectedPositionAttribute(selectedPosition, 'size') }}
+              </div>
 
               <div class="color-container">
                 <div class="color">
-                  <div :class="`subcolor subcolor-white`" />
-                  <div :class="`subcolor subcolor-pink`" />
+                  <div :class="`subcolor subcolor-${getSelectedPositionAttribute(selectedPosition, 'first_color')}`" />
+                  <div :class="`subcolor subcolor-${getSelectedPositionAttribute(selectedPosition, 'second_color')}`" />
                 </div>
               </div>
 
@@ -51,34 +53,49 @@
             <div class="form">
               <div class="labels-container">
                 <div class="input-title-container">
-                  <div class="input-title product-title">name:</div>
-                </div>
-                <div class="input-title-container">
-                  <div class="input-title product-title">phone:</div>
-                </div>
-                <div class="input-title-container">
-                  <div class="input-title product-title">postcode:</div>
+                  <div class="input-title product-title">{{ $t('name') }}:</div>
                 </div>
               </div>
-
               <div class="inputs-container">
-                <input class="input product-title" :placeholder="'Michael Jackson'">
-                <div class="phone-input-container">
-                  <div class="phone-code product-title">+66</div>
-                  <input class="input product-title" :placeholder="112223344" type="number">
-                </div>
-                <input class="input product-title" :placeholder="'52431'">
+                <input class="input product-title" v-model="name">
               </div>
             </div>
 
             <div class="form">
               <div class="labels-container">
                 <div class="input-title-container">
-                  <div class="input-title product-title">address:</div>
+                  <div class="input-title product-title">{{ $t('phone') }}:</div>
                 </div>
               </div>
               <div class="inputs-container">
-                <textarea class="product-title textarea input" rows="4" cols="1">Thailand</textarea>
+                <div class="phone-input-container">
+                  <div class="phone-code product-title">+66</div>
+                  <input class="input product-title" :placeholder="112223344" type="number" v-model="phone">
+                </div>
+              </div>
+            </div>
+
+            <div class="form">
+              <div class="labels-container">
+                <div class="input-title-container">
+                  <div class="input-title product-title">
+                    <div>{{ $t('postcode') }}</div>
+                  :</div>
+                </div>
+              </div>
+              <div class="inputs-container">
+                <input class="input product-title" :placeholder="'52431'" type="number" v-model="postcode">
+              </div>
+            </div>
+
+            <div class="form">
+              <div class="labels-container">
+                <div class="input-title-container">
+                  <div class="input-title product-title">{{ $t('address') }}:</div>
+                </div>
+              </div>
+              <div class="inputs-container">
+                <textarea class="product-title textarea input" rows="4" cols="1" v-model="address"/>
               </div>
             </div>
 
@@ -87,29 +104,64 @@
                 <div class="input-title-container">
                   <div class="input-title product-title">email:</div>
                 </div>
+              </div>
+              <div class="inputs-container">
+                <input class="input product-title" :placeholder="'box@mail.com'" v-model="email">
+              </div>
+            </div>
+
+            <div class="form">
+              <div class="labels-container">
                 <div class="input-title-container">
                   <div class="input-title product-title">facebook:</div>
                 </div>
+              </div>
+              <div class="inputs-container">
+                <input class="input product-title" :placeholder="'web.facebook.com/'" v-model="facebook">
+              </div>
+            </div>
+          
+            <div class="form">
+              <div class="labels-container">
                 <div class="input-title-container">
                   <div class="input-title product-title">line:</div>
                 </div>
+              </div>
+              <div class="inputs-container">
+                <input class="input product-title" :placeholder="'+66112223344'" v-model="line">
+              </div>
+            </div>
+
+            <div class="form">
+              <div class="labels-container">
                 <div class="input-title-container">
                   <div class="input-title product-title">whatsapp:</div>
                 </div>
+              </div>
+              <div class="inputs-container">
+                <input class="input product-title" :placeholder="'+66112223344'" v-model="whatsapp">
+              </div>
+            </div>
+
+            <div class="form">
+              <div class="labels-container">
                 <div class="input-title-container">
                   <div class="input-title product-title">telegram:</div>
                 </div>
+              </div>
+              <div class="inputs-container">
+                <input class="input product-title" :placeholder="'+66112223344'" v-model="telegram">
+              </div>
+            </div>
+
+            <div class="form">
+              <div class="labels-container">
                 <div class="input-title-container">
                   <div class="input-title product-title">vk:</div>
                 </div>
               </div>
               <div class="inputs-container">
-                <input class="input product-title" :placeholder="'box@mail.com'">
-                <input class="input product-title" :placeholder="'web.facebook.com/'">
-                <input class="input product-title" :placeholder="'+66112223344'">
-                <input class="input product-title" :placeholder="'+66112223344'">
-                <input class="input product-title" :placeholder="'+66112223344'">
-                <input class="input product-title" :placeholder="'vk.com/id654321'">
+                <input class="input product-title" :placeholder="'vk.com/id654321'" v-model="vk">
               </div>
             </div>
 
@@ -117,8 +169,8 @@
 
         </div>
 
-        <div class="button main-button">
-          send
+        <div class="button main-button" :class="{'unavailable-button': isSendButtonLoading}">
+          {{ $t('send') }}
         </div>
 
       </div>
@@ -131,6 +183,7 @@
 
 import Loading from '~/components/Loading'
 import productsService from '~/services/productsService'
+import productSharedMethods from '~/sharedMethods/product'
 
 export default {
     
@@ -139,6 +192,17 @@ export default {
   data() {
     return {
       loading: false,
+      name: '',
+      phone: '',
+      postcode: '',
+      address: this.$t('thailand_en_or_th'),
+      email: '',
+      facebook: '',
+      line: '',
+      whatsapp: '',
+      telegram: '',
+      vk: '',
+      isSendButtonLoading: false,
     }
   },
 
@@ -163,9 +227,17 @@ export default {
 
     selectedPosition() {
       return this.$store.state.products.selectedPosition
+    },
+
+    getSelectedPositionFirstPictureUrl() {
+      return productSharedMethods.getSelectedPositionFirstPictureUrl
+    },
+
+    getSelectedPositionAttribute() {
+      return productSharedMethods.getSelectedPositionAttribute
     }
 
-  }
+  },
 
 }
 </script>
@@ -253,7 +325,7 @@ export default {
 }
 .labels-container {
   padding-right: 5px;
-  flex: 0.65;
+  flex: 0.75;
   @media screen and (min-width: 350px) {
     flex: 0.5;
   }
@@ -279,5 +351,14 @@ export default {
 }
 .main-button {
   margin-top: 10px;
+}
+.input-title {
+  text-align: right;
+  display: flex;
+  align-items: center;
+}
+.unavailable-button {
+  background-color: $unavailable-solid-color;
+  cursor: default;
 }
 </style>

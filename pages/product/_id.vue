@@ -10,7 +10,7 @@
             <div class="image-main-container">
               <div class="image-subcontainer">
                 <div class="image"
-                  :style="`background-image: url('${getSelectedPositionPictureUrl()}')`"
+                  :style="`background-image: url('${getSelectedPositionFirstPictureUrl(selectedPosition)}')`"
                 >
                   <div class="in-image-arrows-container"
                     :class="{hidden: !areArrowsVisible}"
@@ -25,7 +25,7 @@
         </div>
         <div class="product-info">
           <h1 class="product-title">
-            {{ getSelectedPositionAttrubute('title') }}
+            {{ getSelectedPositionAttribute(selectedPosition, 'title') }}
           </h1>
           <div class="color-container">
             <div class="color-title product-title">
@@ -65,11 +65,11 @@
       <div class="buy-container">
         <div class="price-container">
           <div class="price product-title">
-            {{ getSelectedPositionAttrubute('sell_price') }} <span class="currency">฿</span>
+            {{ getSelectedPositionAttribute(selectedPosition, 'sell_price') }} <span class="currency">฿</span>
           </div>
         </div>
         <div class="button main-button" @click="goToBuy()">
-          buy
+          {{ $t('buy') }}
         </div>
       </div>
     </div>
@@ -81,6 +81,7 @@
 import Loading from '~/components/Loading'
 import productsService from '~/services/productsService'
 import pageNames from '~/settings/pageNames'
+import productSharedMethods from '~/sharedMethods/product'
 
 export default {
 
@@ -122,6 +123,14 @@ export default {
       return this.$store.state.products.selectedPosition
     },
 
+    getSelectedPositionFirstPictureUrl() {
+      return productSharedMethods.getSelectedPositionFirstPictureUrl
+    },
+
+    getSelectedPositionAttribute() {
+      return productSharedMethods.getSelectedPositionAttribute
+    }
+
   },
 
   watch: {
@@ -139,20 +148,6 @@ export default {
       this.setAreArrowsVisible()
       this.setAllProductColors()
       this.setAllSizesByColor()
-    },
-
-    getSelectedPositionPictureUrl() {
-      if (this.selectedPosition === null) {
-        return ''
-      }
-      return this.selectedPosition.pictures[0].url
-    },
-
-    getSelectedPositionAttrubute(attributeName) {
-      if (this.selectedPosition === null) {
-        return ''
-      }
-      return this.selectedPosition[attributeName]
     },
 
     setAllProductColors() {
@@ -326,7 +321,7 @@ export default {
     },
 
     goToBuy() {
-      this.$store.dispatch('router/goTo', {name: pageNames.position_buy, params: {id: this.selectedPositionId}})
+      this.$store.dispatch('router/goTo', {name: pageNames.position_buy, params: {id: this.selectedPosition.id}})
     },
 
   },
