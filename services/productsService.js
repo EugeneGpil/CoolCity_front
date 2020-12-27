@@ -18,4 +18,8 @@ export default {
     return apiClient.get(`/position/${id}`)
   },
 
+  sendApplication(application) {
+    return apiClient.post('/application', application)
+  },
+
 }

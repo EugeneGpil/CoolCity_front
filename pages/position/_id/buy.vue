@@ -169,7 +169,9 @@
 
         </div>
 
-        <div class="button main-button" :class="{'unavailable-button': isSendButtonLoading}">
+        <div class="button main-button" :class="{'unavailable-button': isSendButtonLoading}"
+          @click="send()"
+        >
           {{ $t('send') }}
         </div>
 
@@ -208,6 +210,34 @@ export default {
 
   components: {
     Loading,
+  },
+
+  methods: {
+
+    async send() {
+      if (this.isSendButtonLoading === true) {
+        return;
+      }
+
+      this.isSendButtonLoading = true;
+
+        await productsService.sendApplication({
+          position_id: this.selectedPosition.id,
+          name: this.name,
+          phone: this.phone,
+          postcode: this.postcode,
+          address: this.address,
+          email: this.email,
+          facebook: this.facebook,
+          line: this.line,
+          whatsapp: this.whatsapp,
+          telegram: this.telegram,
+          vk: this.vk,
+        })
+
+      this.isSendButtonLoading = false
+    },
+
   },
 
   async fetch() {
