@@ -26,6 +26,11 @@ $unavailable-solid-color: rgb(212, 211, 211);
   src: local("Montserrat"),
     url(~assets/fonts/Montserrat/Montserrat-Regular.ttf) format("truetype");
 }
+@font-face {
+  font-family: "Chakra Petch";
+  src: local("Chakra Petch"),
+    url(~assets/fonts/ChakraPetch/ChakraPetch-Regular.ttf) format("truetype");
+}
 
 * {
   box-sizing: border-box;
@@ -64,6 +69,11 @@ $unavailable-solid-color: rgb(212, 211, 211);
   letter-spacing: 1px;
   line-height: 1.4;
   font-weight: 700;
+}
+.th .product-title.th {
+  font-size: 15px;
+  font-family: 'Chakra Petch', sans-serif;
+  font-weight: 500;
 }
 .main-image-container {
   display: flex;

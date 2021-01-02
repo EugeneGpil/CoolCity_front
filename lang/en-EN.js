@@ -9,4 +9,8 @@ export default {
   thailand_en_or_th: 'Thailand',
   buy: 'buy',
   send: 'send',
+  your_application_added_successfully: 'your application added successfully',
+  we_will_contact_you_soon: 'we will contact you soon',
+  back_to_main_page: 'back to main page',
+  back_to_product_page: 'back to contact page',
 }
