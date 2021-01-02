@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="wrapper-wrapper">
+    <div :class="`wrapper-wrapper ${language}`">
       <div class="wrapper">
         <Header />
         <Nuxt />
@@ -18,6 +18,14 @@ export default {
   components: {
     Header,
   },
+
+  computed: {
+
+    language() {
+      return this.$store.state.language.language
+    },
+
+  }
 
 }
 </script>

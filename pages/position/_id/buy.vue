@@ -6,7 +6,7 @@
     <div v-if="!loading" class="wrapper">
       <div class="page-wrapper">
 
-        <h1 class="product-title page-title">
+        <h1 class="product-title page-title th">
           {{ $t('you_want_to_buy') }}
         </h1>
 
@@ -53,18 +53,18 @@
             <div class="form">
               <div class="labels-container">
                 <div class="input-title-container">
-                  <div class="input-title product-title">{{ $t('name') }}:</div>
+                  <div class="input-title th product-title">{{ $t('name') }}:</div>
                 </div>
               </div>
               <div class="inputs-container">
-                <input class="input product-title" v-model="name">
+                <input class="input product-title th" v-model="name">
               </div>
             </div>
 
             <div class="form">
               <div class="labels-container">
                 <div class="input-title-container">
-                  <div class="input-title product-title">{{ $t('phone') }}:</div>
+                  <div class="input-title product-title th">{{ $t('phone') }}:</div>
                 </div>
               </div>
               <div class="inputs-container">
@@ -78,7 +78,7 @@
             <div class="form">
               <div class="labels-container">
                 <div class="input-title-container">
-                  <div class="input-title product-title">
+                  <div class="input-title product-title th">
                     <div>{{ $t('postcode') }}</div>
                   :</div>
                 </div>
@@ -91,11 +91,11 @@
             <div class="form">
               <div class="labels-container">
                 <div class="input-title-container">
-                  <div class="input-title product-title">{{ $t('address') }}:</div>
+                  <div class="input-title product-title th">{{ $t('address') }}:</div>
                 </div>
               </div>
               <div class="inputs-container">
-                <textarea class="product-title textarea input" rows="4" cols="1" v-model="address"/>
+                <textarea class="product-title th textarea input" rows="4" cols="1" v-model="address"/>
               </div>
             </div>
 
@@ -186,6 +186,7 @@
 import Loading from '~/components/Loading'
 import productsService from '~/services/productsService'
 import productSharedMethods from '~/sharedMethods/product'
+import pageNames from '~/settings/pageNames'
 
 export default {
     
@@ -221,7 +222,7 @@ export default {
 
       this.isSendButtonLoading = true;
 
-        await productsService.sendApplication({
+        let addApplicationResponse = (await productsService.sendApplication({
           position_id: this.selectedPosition.id,
           name: this.name,
           phone: this.phone,
@@ -233,7 +234,11 @@ export default {
           whatsapp: this.whatsapp,
           telegram: this.telegram,
           vk: this.vk,
-        })
+        })).data
+
+        if (addApplicationResponse.status === true) {
+          this.$store.dispatch('router/goTo', pageNames.application_added_successfully)
+        }
 
       this.isSendButtonLoading = false
     },
@@ -244,10 +249,9 @@ export default {
     this.loading = true
 
     if (this.selectedPosition.id !== this.$router.currentRoute.params.id) {
-      this.$store.dispatch(
-        'products/setSelectedPosition',
-        (await productsService.getOnePosition(this.$router.currentRoute.params.id)).data.payload[0]
-      )
+      let position = (await productsService.getOnePosition(this.$router.currentRoute.params.id)).data.payload[0]
+      this.$store.dispatch('products/setSelectedPosition', position)
+      this.$store.dispatch('products/setSelectedPositionId', position.id)
     }
 
     this.loading = false
@@ -273,7 +277,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.page-title {
+.product-title.page-title.th {
   font-size: 17px;
 }
 .page-wrapper {

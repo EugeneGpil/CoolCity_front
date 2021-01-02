@@ -9,4 +9,8 @@ export default {
   thailand_en_or_th: 'Thailand',
   buy: 'купить',
   send: 'отправить',
+  your_application_added_successfully: 'Ваша заявка успешно добавлена',
+  we_will_contact_you_soon: 'Мы скоро с вами свяжемся',
+  back_to_main_page: 'на главную',
+  back_to_product_page: 'на страницу товара',
 }

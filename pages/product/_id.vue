@@ -28,7 +28,7 @@
             {{ getSelectedPositionAttribute(selectedPosition, 'title') }}
           </h1>
           <div class="color-container">
-            <div class="color-title product-title">
+            <div class="color-title product-title th">
               {{ $t('color') }}
             </div>
             <div class="color-selector">
@@ -47,7 +47,7 @@
             </div>
           </div>
           <div class="size-container">
-            <div class="size-title product-title">
+            <div class="size-title product-title th">
               {{ $t('size') }}
             </div>
             <div class="size-selector">
