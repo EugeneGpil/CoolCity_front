@@ -8,6 +8,9 @@ export default {
   },
 
   getPageInfoWithoutLanguage(page) {
+    if (page === null) {
+      return null;
+    }
     return {
       name: this.getPageNameWithoutLanguage(page.name),
       params: page.params,

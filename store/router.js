@@ -50,6 +50,9 @@ export const actions = {
   },
 
   setCurrentPage(context, currentPage) {
+    if (currentPage === null) {
+      return
+    }
     context.commit('setCurrentPage', currentPage)
   },
 
