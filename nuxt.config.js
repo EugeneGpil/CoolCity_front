@@ -28,6 +28,7 @@ export default {
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
     {src: '~/plugins/vueSimpleSpinner', mode: 'client'},
+    {src: '~/plugins/googleAnalytics', mode: 'client'},
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -79,7 +80,6 @@ export default {
       },
     ],
     '@nuxtjs/style-resources',
-    '@nuxtjs/google-analytics',
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
@@ -111,14 +111,5 @@ export default {
         'faCaretRight'
       ],
     },
-  },
-
-  googleAnalytics: {
-    id: process.env.GOOGLE_ANALYTICS_ID, // Use as fallback if no runtime config is provided
-  },
-  publicRuntimeConfig: {
-    googleAnalytics: {
-      id: process.env.GOOGLE_ANALYTICS_ID
-    }
   },
 }
