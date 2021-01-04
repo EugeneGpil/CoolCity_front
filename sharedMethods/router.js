@@ -1,6 +1,9 @@
 export default {
 
   getPageNameWithoutLanguage(page) {
+    if (page === null) {
+      return null
+    }
     if (typeof page === 'string') {
       return page.substring(0, page.length - 5)
     }
@@ -9,7 +12,7 @@ export default {
 
   getPageInfoWithoutLanguage(page) {
     if (page === null) {
-      return null;
+      return null
     }
     return {
       name: this.getPageNameWithoutLanguage(page.name),
