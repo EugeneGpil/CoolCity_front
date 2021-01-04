@@ -70,8 +70,13 @@ export default {
       return this.$store.state.products.products
     },
 
-  }
+  },
 
+  head() {
+    return {
+      title: 'Cool City',
+    }
+  },
 }
 </script>
 
