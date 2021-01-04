@@ -13,10 +13,10 @@
   "dependencies": {
     "@nuxt/typescript-runtime": "^2.0.0",
     "@nuxtjs/axios": "^5.12.2",
-    "@nuxtjs/google-analytics": "^2.4.0",
     "core-js": "^3.6.5",
     "nuxt": "^2.14.6",
     "nuxt-i18n": "^6.16.0",
+    "vue-gtag": "^1.10.0",
     "vue-simple-spinner": "^1.2.10"
   },
   "devDependencies": {
