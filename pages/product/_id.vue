@@ -349,9 +349,6 @@ export default {
   border-top-left-radius: 7px;
   border-bottom-left-radius: 7px;
 }
-.product-title {
-  margin-top: 15px;
-}
 .in-image-arrows-container {
   width: 100%;
   height: 100%;
