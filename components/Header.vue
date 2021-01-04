@@ -106,5 +106,6 @@ export default {
 .flag {
   margin-left: 10px;
   margin-bottom: 10px;
+  cursor: pointer;
 }
 </style>
