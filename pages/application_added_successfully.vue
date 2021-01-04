@@ -47,7 +47,13 @@ export default {
       return this.$store.state.products.selectedPosition
     }
 
-  }
+  },
+
+  head() {
+    return {
+      title: 'Application added successfully',
+    }
+  },
 
 }
 </script>

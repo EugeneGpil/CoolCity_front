@@ -66,6 +66,12 @@ export default {
 
   },
 
+  head() {
+    return {
+      title: 'Language select',
+    }
+  },
+
 }
 </script>
 

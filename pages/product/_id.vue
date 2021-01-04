@@ -326,6 +326,12 @@ export default {
 
   },
 
+  head() {
+    return {
+      title: 'Product',
+    }
+  },
+
 }
 </script>
 
