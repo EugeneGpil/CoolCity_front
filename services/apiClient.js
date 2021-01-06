@@ -1,7 +1,7 @@
-import axios from 'axios';
+import axios from 'axios'
 
 const apiClient = axios.create({
-  baseURL: process.env.apiUrl + '/api',
+  baseURL: (process.env.apiUrl || process.env.API_URL) + '/api',
   withCredentials: true,
   headers: {
     Accept: 'application/json',
@@ -9,4 +9,4 @@ const apiClient = axios.create({
   }
 })
 
-export default apiClient;
+export default apiClient

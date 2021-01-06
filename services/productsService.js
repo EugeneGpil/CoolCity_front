@@ -11,7 +11,7 @@ export default {
   },
 
   getPositionsByProduct(id) {
-    return apiClient.get(`product/${id}/positions`)
+    return apiClient.get(`/product/${id}/positions`)
   },
 
   getOnePosition(id) {

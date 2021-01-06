@@ -1,9 +1,12 @@
+import getRoutes from './build/getRoutes'
+import i18mSettings from './settings/i18n'
+
 export default {
 
   server: {
     port: 3000, // default: 3000
     host: process.env.HOST, // default: localhost,
-    timing: false
+    timing: false,
   },
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
@@ -19,8 +22,8 @@ export default {
     ],
     script: [
       {
-        src: `https://www.googletagmanager.com/gtag/js?id=${process.env.GOOGLE_ANALYTICS_ID}`
-      }
+        src: `https://www.googletagmanager.com/gtag/js?id=${process.env.GOOGLE_ANALYTICS_ID}`,
+      },
     ],
   },
 
@@ -51,39 +54,10 @@ export default {
     '@nuxtjs/axios',
     [
       'nuxt-i18n',
-      {
-        lazy: true,
-        seo: false,
-        detectBrowserLanguage: false,
-        defaultLocale: 'th',
-        vueI18n: {
-          fallbackLocale: 'en',
-        },
-        locales: [
-          {
-            name: 'Thai',
-            code: 'th',
-            iso: 'th-TH',
-            file: 'th-TH.js',
-          },
-          {
-            name: 'English',
-            code: 'en',
-            iso: 'en-EN',
-            file: 'en-EN.js',
-          },
-          {
-            name: 'Russian',
-            code: 'ru',
-            iso: 'ru-RU',
-            file: 'ru-RU.js',
-          },
-        ],
-        langDir: 'lang/',
-        defaultLocale: 'th',
-      },
+      i18mSettings,
     ],
     '@nuxtjs/style-resources',
+    '@nuxtjs/sitemap',
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
@@ -106,6 +80,7 @@ export default {
   router: {
     middleware: [
       'rememberPage',
+      'googleAnalytics',
     ],
   },
 
@@ -117,4 +92,16 @@ export default {
       ],
     },
   },
+
+  sitemap: {
+    path: '/sitemap.xml',
+    hostname: process.env.BASE_URL,
+    i18n: true,
+    i18n: {
+      locales: ['th', 'en', 'ru'],
+      routeNameSeparator: '___',
+    },
+    routes: getRoutes,
+  },
+
 }
