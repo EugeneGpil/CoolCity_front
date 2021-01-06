@@ -11,8 +11,6 @@ let addDinamicRoutes = async (data) => {
 
   const allIds = (await getIdsMethod()).data.payload
 
-  const dateTime = new Date().toLocaleString()
-
   for (let i = 0; i < nuxtRoutes.length; i++) {
     let currentNuxtRoute = nuxtRoutes[i]
     if (getPageNameWithoutLanguageMethod(currentNuxtRoute) === routeNameToFind) {
