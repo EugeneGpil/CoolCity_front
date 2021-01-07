@@ -30,6 +30,7 @@
 
 import Loading from '~/components/Loading'
 import pageNames from '~/settings/pageNames'
+import defaultHead from '~/settings/defaultHead'
 
 export default {
 
@@ -73,9 +74,7 @@ export default {
   },
 
   head() {
-    return {
-      title: `Cool City - ${this.$t('online_fashion_clothing_store_in_thailand')}`,
-    }
+    return new defaultHead(this.$t, this.$i18n)
   },
 }
 </script>

@@ -19,6 +19,7 @@
 <script>
 
 import pageNames from '~/settings/pageNames'
+import defaultHead from '~/settings/defaultHead'
 
 export default {
   
@@ -34,7 +35,7 @@ export default {
       this.$store.dispatch('router/goTo', {
         name: pageNames.product,
         params: {
-          id: this.selectedPosition ? this.selectedPosition.product_id : 1,
+          id: (this.selectedPosition && this.selectedPosition.product_id) ? this.selectedPosition.product_id : 1,
         },
       })
     },
@@ -50,9 +51,7 @@ export default {
   },
 
   head() {
-    return {
-      title: `Cool City - ${this.$t('online_fashion_clothing_store_in_thailand')}`,
-    }
+    return new defaultHead(this.$t, this.$i18n)
   },
 
 }
