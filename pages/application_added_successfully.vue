@@ -51,7 +51,7 @@ export default {
 
   head() {
     return {
-      title: 'Application added successfully',
+      title: `Cool City - ${this.$t('online_fashion_clothing_store_in_thailand')}`,
     }
   },
 

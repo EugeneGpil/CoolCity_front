@@ -13,4 +13,5 @@ export default {
   we_will_contact_you_soon: 'เราจะติดต่อคุณเร็ว ๆ นี้',
   back_to_main_page: 'กลับไปที่หน้าหลัก',
   back_to_product_page: 'กลับไปที่หน้าติดต่อ',
+  online_fashion_clothing_store_in_thailand: 'ร้านขายเสื้อผ้าแฟชั่นออนไลน์ในประเทศไทย',
 }

@@ -275,7 +275,7 @@ export default {
 
   head() {
     return {
-      title: 'Buy',
+      title: `Cool City - ${this.$t('buy')} ${this.getSelectedPositionAttribute(this.selectedPosition, 'title')}`,
     }
   },
 

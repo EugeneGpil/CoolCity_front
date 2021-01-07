@@ -74,7 +74,7 @@ export default {
 
   head() {
     return {
-      title: 'Cool City',
+      title: `Cool City - ${this.$t('online_fashion_clothing_store_in_thailand')}`,
     }
   },
 }
