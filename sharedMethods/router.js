@@ -4,10 +4,10 @@ export default {
     if (page === null) {
       return null
     }
-    if (typeof page === 'string') {
-      return page.substring(0, page.length - 5)
+    if (typeof page === 'object') {
+      page = page.name
     }
-    return page.name.substring(0, page.name.length -5)
+    return page.substring(0, page.length - 5)
   },
 
   getPageInfoWithoutLanguage(page) {
@@ -19,5 +19,15 @@ export default {
       params: page.params,
     }
   },
+
+  getLanguage(page) {
+    if (page === null) {
+      return null
+    }
+    if (typeof page === 'object') {
+      page = page.name
+    }
+    return page.substring(page.length - 2)
+  }
 
 }
