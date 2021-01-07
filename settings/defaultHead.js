@@ -9,7 +9,7 @@ export default function ($t, $i18n) {
       {
         hid: 'description',
         name: 'description',
-        content: this.$t('here_you_can_buy_nice_clothes_at_a_really_low_price'),
+        content: this.$t('default_description_meta_tag'),
       },
     ],
   }
