@@ -13,10 +13,5 @@ export default {
   we_will_contact_you_soon: 'we will contact you soon',
   back_to_main_page: 'back to main page',
   back_to_product_page: 'back to product page',
-
-  // greetings_page: {
-  //   hello: 'Hello!',
-  //   looks_like_you_are_first_time_on_our_site
-  // },
-
+  online_fashion_clothing_store_in_thailand: 'online fashion clothing store in Thailand',
 }

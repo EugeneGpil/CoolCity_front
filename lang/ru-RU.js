@@ -13,4 +13,5 @@ export default {
   we_will_contact_you_soon: 'Мы скоро с вами свяжемся',
   back_to_main_page: 'на главную',
   back_to_product_page: 'на страницу товара',
+  online_fashion_clothing_store_in_thailand: 'онлайн магазин модной одежды в Таиланде',
 }
