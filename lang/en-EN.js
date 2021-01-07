@@ -14,4 +14,5 @@ export default {
   back_to_main_page: 'back to main page',
   back_to_product_page: 'back to product page',
   online_fashion_clothing_store_in_thailand: 'online fashion clothing store in Thailand',
+  here_you_can_buy_nice_clothes_at_a_really_low_price: 'Here you can buy nice clothes at a really low price',
 }

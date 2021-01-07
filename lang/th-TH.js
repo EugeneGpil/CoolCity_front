@@ -14,4 +14,5 @@ export default {
   back_to_main_page: 'กลับไปที่หน้าหลัก',
   back_to_product_page: 'กลับไปที่หน้าติดต่อ',
   online_fashion_clothing_store_in_thailand: 'ร้านขายเสื้อผ้าแฟชั่นออนไลน์ในประเทศไทย',
+  here_you_can_buy_nice_clothes_at_a_really_low_price: 'ที่นี่คุณสามารถซื้อเสื้อผ้าสวย ๆ ได้ในราคาเบา ๆ',
 }
