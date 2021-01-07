@@ -1,7 +1,6 @@
 export default {
   lazy: true,
   seo: false,
-  detectBrowserLanguage: false,
   defaultLocale: 'th',
   vueI18n: {
     fallbackLocale: 'en',
@@ -28,4 +27,9 @@ export default {
   ],
   langDir: 'lang/',
   defaultLocale: 'th',
+  detectBrowserLanguage: {
+    useCookie: true,
+    cookieKey: 'i18n_redirected',
+    onlyOnRoot: true,
+  },
 }

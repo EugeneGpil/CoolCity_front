@@ -19,6 +19,7 @@
 import flagPaths from '~/settings/flags'
 import localStorageSharedMethods from '~/sharedMethods/localStorage'
 import pageNames from '~/settings/pageNames'
+import routerSharedMethods from '~/sharedMethods/router'
 
 export default {
 
@@ -29,13 +30,12 @@ export default {
   },
   
   mounted() {
-    const selectedLanguage = localStorageSharedMethods.getLanguage()
-    if (!selectedLanguage) {
-      this.goToLanguageSelect()
-      return;
-    }
-    this.$i18n.setLocale(selectedLanguage)
-    this.$store.dispatch('language/setLanguage', selectedLanguage)
+    this.$store.dispatch(
+      'language/setLanguage',
+      routerSharedMethods.getLanguage(
+        this.$router.currentRoute
+      )
+    )
   },
 
   methods: {
