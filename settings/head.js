@@ -3,19 +3,22 @@ import productSharedMethods from '~/sharedMethods/product'
 export default {
 
   default: function() {
+
+    let title = `Cool City - ${this.$t('online_fashion_clothing_store_in_thailand')}`
+
     return {
-      title: `Cool City - ${this.$t('online_fashion_clothing_store_in_thailand')}`,
+      title,
       meta: [
         {
           hid: 'description',
           name: 'description',
-          content: this.$t('default_description_meta_tag'),
+          content: 'descriptoin' + this.$t('default_description_meta_tag'),
         },
         {
           hid: 'og:title',
           name: 'og:title',
           property: 'og:title',
-          content: this.$t('default_description_meta_tag'),
+          content: title,
         },
       ],
     }
@@ -24,16 +27,16 @@ export default {
   buy: function() {
 
     let selectedPosition = this.$store.state.products.selectedPosition
-    let title = productSharedMethods.getPositionAttribute(selectedPosition, 'title', this.$i18n.locale)
+    let productTitle = productSharedMethods.getPositionAttribute(selectedPosition, 'title', this.$i18n.locale)
+    let title = `Cool City - ${this.$t('buy')} ${productTitle}`
 
-    let description = `${this.$t('here_you_can_buy')} ${title}. ${this.$t('delivery_throughout_thailand')}`
+    let description = `${this.$t('here_you_can_buy')} ${productTitle}. ${this.$t('delivery_throughout_thailand')}`
     if (this.$i18n.locale === 'th') {
-      description = `${this.$t('here_you_can_buy')}${title} ${this.$t('delivery_throughout_thailand')}`
+      description = `${this.$t('here_you_can_buy')}${productTitle} ${this.$t('delivery_throughout_thailand')}`
     }
 
     return {
-      title:
-        `Cool City - ${this.$t('buy')} ${title}`,
+      title,
       meta: [
         {
           hid: 'description',
@@ -44,7 +47,7 @@ export default {
           hid: 'og:title',
           name: 'og:title',
           property: 'og:title',
-          content: description,
+          content: title,
         },
       ],
     }
