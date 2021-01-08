@@ -1,7 +1,7 @@
 export default {
 
   getPositionFirstPictureUrl(position) {
-    if (position === null || position === undefined) {
+    if (position === null || position === undefined || position.pictures === undefined) {
       return ''
     }
     return position.pictures[0].url
@@ -11,7 +11,12 @@ export default {
     if (position === null) {
       return ''
     }
-    if (attributeName === 'title' && language !== null & language !== 'en') {
+    if (
+      attributeName === 'title'
+      && language !== null
+      && language !== 'en' 
+      && position.title_translations !== undefined
+    ) {
       for (let i = 0; i < position.title_translations.length; i++) {
         let currentTitleTranslation = position.title_translations[i]
         if (currentTitleTranslation.language === language) {
