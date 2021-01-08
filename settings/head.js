@@ -21,14 +21,13 @@ export default {
       {
         hid: 'description',
         name: 'description',
+        content: this.$t('default_description_meta_tag'),
+      },
+      {
+        hid: 'og:description',
         property: 'og:description',
         content: this.$t('default_description_meta_tag'),
       },
-      // {
-      //   hid: 'og:description',
-      //   property: 'og:description',
-      //   content: this.$t('default_description_meta_tag'),
-      // },
       {
         hid: 'og:title',
         property: 'og:title',
@@ -74,14 +73,13 @@ export default {
       {
         hid: 'description',
         name: 'description',
+        content: description,
+      },
+      {
+        hid: 'og:description',
         property: 'og:description',
         content: description,
       },
-      // {
-      //   hid: 'og:description',
-      //   property: 'og:description',
-      //   content: description,
-      // },
       {
         hid: 'og:title',
         property: 'og:title',
