@@ -12,7 +12,7 @@ export default {
         {
           hid: 'description',
           name: 'description',
-          content: 'descriptoin' + this.$t('default_description_meta_tag'),
+          content: this.$t('default_description_meta_tag'),
         },
         {
           hid: 'og:title',
