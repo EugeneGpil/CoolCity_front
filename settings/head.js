@@ -1,5 +1,13 @@
 import productSharedMethods from '~/sharedMethods/product'
 
+let getOgUrl = function() {
+  return {
+    hid: 'og:url',
+    property: 'og:url',
+    content: `${process.env.baseUrl}${this.$router.currentRoute.path}`,
+  }
+}
+
 export default {
 
   default: function() {
@@ -16,16 +24,15 @@ export default {
         },
         {
           hid: 'og:title',
-          name: 'og:title',
           property: 'og:title',
           content: title,
         },
         {
           hid: 'og:image',
-          name: 'og:image',
           property: 'og:image',
           content: `${process.env.baseUrl}/product_images/1/red/1.jpeg`,
         },
+        getOgUrl.bind(this)(),
       ],
     }
   },
@@ -52,16 +59,15 @@ export default {
         },
         {
           hid: 'og:title',
-          name: 'og:title',
           property: 'og:title',
           content: title,
         },
         {
           hid: 'og:image',
-          name: 'og:image',
           property: 'og:image',
           content: image,
         },
+        getOgUrl.bind(this)(),
       ],
     }
   }
