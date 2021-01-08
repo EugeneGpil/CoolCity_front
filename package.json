@@ -9,7 +9,8 @@
     "generate": "nuxt-ts generate",
     "lint:js": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "lint": "npm run lint:js",
-    "create_fb_sdk": "export $(cat .env | xargs) && node commands/create_fb_sdk.js"
+    "create_fb_sdk": "export $(cat .env | xargs) && node commands/create_fb_sdk.js",
+    "release": "git pull && npm run build && npx kill-port 3000 && npm run start &"
   },
   "dependencies": {
     "@nuxt/typescript-runtime": "^2.0.0",
