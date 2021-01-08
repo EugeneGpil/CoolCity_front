@@ -12,7 +12,7 @@ let getDefaultMeta = function() {
 
 export default {
 
-  default: function() {
+  default: function(doRobotsFollow = true) {
 
     let title = `Cool City - ${this.$t('online_fashion_clothing_store_in_thailand')}`
 
@@ -39,6 +39,15 @@ export default {
         content: `${process.env.baseUrl}/product_images/1/red/1.jpeg`,
       }
     )
+    if (doRobotsFollow === false) {
+      meta.push(
+        {
+          hid: 'robots',
+          name: 'robots',
+          content: 'Nofollow',
+        }
+      )
+    }
 
     return {
       title,
