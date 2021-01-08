@@ -20,6 +20,12 @@ export default {
           property: 'og:title',
           content: title,
         },
+        {
+          hid: 'og:image',
+          name: 'og:image',
+          property: 'og:image',
+          content: `${process.env.baseUrl}/1/red/1.jpeg`,
+        },
       ],
     }
   },
@@ -28,6 +34,7 @@ export default {
 
     let selectedPosition = this.$store.state.products.selectedPosition
     let productTitle = productSharedMethods.getPositionAttribute(selectedPosition, 'title', this.$i18n.locale)
+    let image = `${process.env.baseUrl}${productSharedMethods.getPositionFirstPictureUrl(selectedPosition)}`
     let title = `Cool City - ${this.$t('buy')} ${productTitle}`
 
     let description = `${this.$t('here_you_can_buy')} ${productTitle}. ${this.$t('delivery_throughout_thailand')}`
@@ -48,6 +55,12 @@ export default {
           name: 'og:title',
           property: 'og:title',
           content: title,
+        },
+        {
+          hid: 'og:image',
+          name: 'og:image',
+          property: 'og:image',
+          content: image,
         },
       ],
     }
