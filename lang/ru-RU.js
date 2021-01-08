@@ -15,4 +15,6 @@ export default {
   back_to_product_page: 'на страницу товара',
   online_fashion_clothing_store_in_thailand: 'онлайн магазин модной одежды в Таиланде',
   default_description_meta_tag: 'Здесь вы можете купить красивую одежду по действительно низкой цене. Доставка по всему Таиланду',
+  delivery_throughout_thailand: 'Доставка по всему Таиланду',
+  here_you_can_buy: 'Здесь вы можете купить',
 }

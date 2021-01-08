@@ -1,5 +1,5 @@
-import getRoutes from './build/getRoutes'
 import i18mSettings from './settings/i18n'
+import sitemapSettings from './settings/sitemap'
 
 export default {
 
@@ -93,15 +93,6 @@ export default {
     },
   },
 
-  sitemap: {
-    path: '/sitemap.xml',
-    hostname: process.env.BASE_URL,
-    i18n: true,
-    i18n: {
-      locales: ['th', 'en', 'ru'],
-      routeNameSeparator: '___',
-    },
-    routes: getRoutes,
-  },
+  sitemap: sitemapSettings,
 
 }

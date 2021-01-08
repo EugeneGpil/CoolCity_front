@@ -1,20 +1,28 @@
 export default {
 
-  getSelectedPositionFirstPictureUrl(selectedPosition) {
-    if (selectedPosition === null || selectedPosition === undefined) {
+  getPositionFirstPictureUrl(position) {
+    if (position === null || position === undefined) {
       return ''
     }
-    return selectedPosition.pictures[0].url
+    return position.pictures[0].url
   },
 
-  getSelectedPositionAttribute(selectedPosition, attributeName) {
-    if (selectedPosition === null) {
+  getPositionAttribute(position, attributeName, language = null) {
+    if (position === null) {
       return ''
     }
-    if (selectedPosition[attributeName] === null && attributeName === 'second_color') {
-      return selectedPosition['first_color']
+    if (attributeName === 'title' && language !== null & language !== 'en') {
+      for (let i = 0; i < position.title_translations.length; i++) {
+        let currentTitleTranslation = position.title_translations[i]
+        if (currentTitleTranslation.language === language) {
+          return currentTitleTranslation.title
+        }
+      }
     }
-    return selectedPosition[attributeName]
+    if (position[attributeName] === null && attributeName === 'second_color') {
+      return position['first_color']
+    }
+    return position[attributeName]
   },
 
 }

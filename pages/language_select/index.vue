@@ -35,7 +35,7 @@
 
 import flagsPaths from '~/settings/flags'
 import pageNames from '~/settings/pageNames'
-import defaultHead from '~/settings/defaultHead'
+import head from '~/settings/head'
 
 export default {
 
@@ -68,7 +68,7 @@ export default {
   },
 
   head() {
-    return new defaultHead(this.$t, this.$i18n)
+    return head.default.bind(this)()
   },
 
 }

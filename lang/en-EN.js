@@ -15,4 +15,6 @@ export default {
   back_to_product_page: 'back to product page',
   online_fashion_clothing_store_in_thailand: 'online fashion clothing store in Thailand',
   default_description_meta_tag: 'Here you can buy nice clothes at a really low price. Delivery throughout Thailand',
+  delivery_throughout_thailand: 'Delivery throughout Thailand',
+  here_you_can_buy: 'Here you can buy',
 }
