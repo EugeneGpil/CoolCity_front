@@ -6,6 +6,9 @@
 # install dependencies
 $ npm install
 
+# create facebook sdk js file
+$ npm run create_fb_sdk
+
 # serve with hot reload at localhost:3000
 $ npm run dev
 
