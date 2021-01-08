@@ -24,7 +24,7 @@ export default {
           hid: 'og:image',
           name: 'og:image',
           property: 'og:image',
-          content: `${process.env.baseUrl}/1/red/1.jpeg`,
+          content: `${process.env.baseUrl}/product_images/1/red/1.jpeg`,
         },
       ],
     }
