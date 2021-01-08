@@ -27,9 +27,9 @@
               </div>
             </div>
 
-            <div class="product-title th product-name">
+            <h2 class="product-title th product-name">
               {{ getPositionAttribute(selectedPosition, 'title', $i18n.locale) }}
-            </div>
+            </h2>
 
             <div class="product-options">
 

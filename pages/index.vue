@@ -13,9 +13,9 @@
       >
         <img class="product-image" :src="product.pictures[0].url">
         <div class="product-info">
-          <div class="product-title th">
+          <h2 class="product-title th">
             {{ getPositionAttribute(product, 'title', $i18n.locale) }}
-          </div>
+          </h2>
           <div class="product-title">
             {{ product.sell_price }} <span class="currency">฿</span>
           </div>

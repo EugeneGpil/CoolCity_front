@@ -28,9 +28,9 @@
             {{ getPositionAttribute(selectedPosition, 'title', $i18n.locale) }}
           </h1>
           <div class="color-container">
-            <div class="color-title product-title th">
+            <h2 class="color-title product-title th">
               {{ $t('color') }}
-            </div>
+            </h2>
             <div class="color-selector">
               <div v-for="productColor in allProductColors">
                 <div class="color-container" @click="setPositionIdByColor(productColor)">
@@ -47,9 +47,9 @@
             </div>
           </div>
           <div class="size-container">
-            <div class="size-title product-title th">
+            <h2 class="size-title product-title th">
               {{ $t('size') }}
-            </div>
+            </h2>
             <div class="size-selector">
               <div
                 v-for="size in allSizesByColor"
@@ -425,5 +425,9 @@ export default {
 }
 .hidden {
   display: none;
+}
+h1.product-title {
+  margin-block-end: 0.67em;
+  margin-block-start: 0.67em;
 }
 </style>
