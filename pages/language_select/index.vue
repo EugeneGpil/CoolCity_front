@@ -68,7 +68,7 @@ export default {
   },
 
   head() {
-    return head.default.bind(this)()
+    return head.default.bind(this)(false)
   },
 
 }
