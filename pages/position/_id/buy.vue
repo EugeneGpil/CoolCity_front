@@ -19,7 +19,7 @@
                 <div class="image-main-container">
                   <div class="image-subcontainer">
                     <div class="image"
-                      :style="`background-image: url('${getSelectedPositionFirstPictureUrl(selectedPosition)}')`"
+                      :style="`background-image: url('${getPositionFirstPictureUrl(selectedPosition)}')`"
                     >
                     </div>
                   </div>
@@ -27,20 +27,20 @@
               </div>
             </div>
 
-            <div class="product-title product-name">
-              {{ getSelectedPositionAttribute(selectedPosition, 'title') }}
+            <div class="product-title th product-name">
+              {{ getPositionAttribute(selectedPosition, 'title', $i18n.locale) }}
             </div>
 
             <div class="product-options">
 
               <div class="product-title size selected-size">
-                {{ getSelectedPositionAttribute(selectedPosition, 'size') }}
+                {{ getPositionAttribute(selectedPosition, 'size') }}
               </div>
 
               <div class="color-container">
                 <div class="color">
-                  <div :class="`subcolor subcolor-${getSelectedPositionAttribute(selectedPosition, 'first_color')}`" />
-                  <div :class="`subcolor subcolor-${getSelectedPositionAttribute(selectedPosition, 'second_color')}`" />
+                  <div :class="`subcolor subcolor-${getPositionAttribute(selectedPosition, 'first_color')}`" />
+                  <div :class="`subcolor subcolor-${getPositionAttribute(selectedPosition, 'second_color')}`" />
                 </div>
               </div>
 
@@ -187,6 +187,7 @@ import Loading from '~/components/Loading'
 import productsService from '~/services/productsService'
 import productSharedMethods from '~/sharedMethods/product'
 import pageNames from '~/settings/pageNames'
+import head from '~/settings/head'
 
 export default {
     
@@ -263,20 +264,18 @@ export default {
       return this.$store.state.products.selectedPosition
     },
 
-    getSelectedPositionFirstPictureUrl() {
-      return productSharedMethods.getSelectedPositionFirstPictureUrl
+    getPositionFirstPictureUrl() {
+      return productSharedMethods.getPositionFirstPictureUrl
     },
 
-    getSelectedPositionAttribute() {
-      return productSharedMethods.getSelectedPositionAttribute
+    getPositionAttribute() {
+      return productSharedMethods.getPositionAttribute
     }
 
   },
 
   head() {
-    return {
-      title: `Cool City - ${this.$t('buy')} ${this.getSelectedPositionAttribute(this.selectedPosition, 'title')}`,
-    }
+    return head.buy.bind(this)()
   },
 
 }

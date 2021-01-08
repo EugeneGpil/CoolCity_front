@@ -13,8 +13,8 @@
       >
         <img class="product-image" :src="product.pictures[0].url">
         <div class="product-info">
-          <div class="product-title">
-            {{ product.title }}
+          <div class="product-title th">
+            {{ getPositionAttribute(product, 'title', $i18n.locale) }}
           </div>
           <div class="product-title">
             {{ product.sell_price }} <span class="currency">฿</span>
@@ -30,7 +30,8 @@
 
 import Loading from '~/components/Loading'
 import pageNames from '~/settings/pageNames'
-import defaultHead from '~/settings/defaultHead'
+import head from '~/settings/head'
+import productSharedMethods from '~/sharedMethods/product'
 
 export default {
 
@@ -71,10 +72,14 @@ export default {
       return this.$store.state.products.products
     },
 
+    getPositionAttribute() {
+      return productSharedMethods.getPositionAttribute
+    },
+
   },
 
   head() {
-    return new defaultHead(this.$t, this.$i18n)
+    return head.default.bind(this)()
   },
 }
 </script>

@@ -15,4 +15,6 @@ export default {
   back_to_product_page: 'กลับไปที่หน้าติดต่อ',
   online_fashion_clothing_store_in_thailand: 'ร้านขายเสื้อผ้าแฟชั่นออนไลน์ในประเทศไทย',
   default_description_meta_tag: 'ที่นี่คุณสามารถซื้อเสื้อผ้าสวย ๆ ได้ในราคาเบา ๆ จัดส่งทั่วไทย',
+  delivery_throughout_thailand: 'จัดส่งทั่วไทย',
+  here_you_can_buy: 'ที่นี่คุณสามารถซื้อได้',
 }

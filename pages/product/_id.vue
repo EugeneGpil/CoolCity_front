@@ -10,7 +10,7 @@
             <div class="image-main-container">
               <div class="image-subcontainer">
                 <div class="image"
-                  :style="`background-image: url('${getSelectedPositionFirstPictureUrl(selectedPosition)}')`"
+                  :style="`background-image: url('${getPositionFirstPictureUrl(selectedPosition)}')`"
                 >
                   <div class="in-image-arrows-container"
                     :class="{hidden: !areArrowsVisible}"
@@ -24,8 +24,8 @@
           </div>
         </div>
         <div class="product-info">
-          <h1 class="product-title">
-            {{ getSelectedPositionAttribute(selectedPosition, 'title') }}
+          <h1 class="product-title th">
+            {{ getPositionAttribute(selectedPosition, 'title', $i18n.locale) }}
           </h1>
           <div class="color-container">
             <div class="color-title product-title th">
@@ -65,7 +65,7 @@
       <div class="buy-container">
         <div class="price-container">
           <div class="price product-title">
-            {{ getSelectedPositionAttribute(selectedPosition, 'sell_price') }} <span class="currency">฿</span>
+            {{ getPositionAttribute(selectedPosition, 'sell_price') }} <span class="currency">฿</span>
           </div>
         </div>
         <div class="button main-button" @click="goToBuy()">
@@ -82,6 +82,7 @@ import Loading from '~/components/Loading'
 import productsService from '~/services/productsService'
 import pageNames from '~/settings/pageNames'
 import productSharedMethods from '~/sharedMethods/product'
+import head from '~/settings/head'
 
 export default {
 
@@ -123,12 +124,12 @@ export default {
       return this.$store.state.products.selectedPosition
     },
 
-    getSelectedPositionFirstPictureUrl() {
-      return productSharedMethods.getSelectedPositionFirstPictureUrl
+    getPositionFirstPictureUrl() {
+      return productSharedMethods.getPositionFirstPictureUrl
     },
 
-    getSelectedPositionAttribute() {
-      return productSharedMethods.getSelectedPositionAttribute
+    getPositionAttribute() {
+      return productSharedMethods.getPositionAttribute
     }
 
   },
@@ -327,9 +328,7 @@ export default {
   },
 
   head() {
-    return {
-      title: `Cool City - ${this.$t('buy')} ${this.getSelectedPositionAttribute(this.selectedPosition, 'title')}`,
-    }
+    return head.buy.bind(this)()
   },
 
 }
