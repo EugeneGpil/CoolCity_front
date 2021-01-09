@@ -1,15 +1,12 @@
 import getRoutes from '../build/getRoutes'
-import i18nSettings from '../settings/i18n'
+import i18nPreparedSettings from '../settings/i18nPrepared'
 
 let pathsToExclude = [
   '/application_added_successfully',
   '/language_select',
 ]
 
-let allLocaleCodes = []
-for (let i = 0; i < i18nSettings.locales.length; i++) {
-  allLocaleCodes.push(i18nSettings.locales[i].code)
-}
+let allLocaleCodes = i18nPreparedSettings.allLocaleCodes
 
 let allPathsToExcludeWithLocale = []
 for (let i = 0; i < pathsToExclude.length; i++) {
