@@ -7,6 +7,9 @@ export default {
     if (typeof page === 'object') {
       page = page.name
     }
+    if (page === undefined) {
+      return null
+    }
     return page.substring(0, page.length - 5)
   },
 
@@ -21,11 +24,14 @@ export default {
   },
 
   getLanguage(page) {
+    if (typeof page === 'object') {
+      page = page.name
+    }
     if (page === null) {
       return null
     }
-    if (typeof page === 'object') {
-      page = page.name
+    if (page === undefined) {
+      return null
     }
     return page.substring(page.length - 2)
   }

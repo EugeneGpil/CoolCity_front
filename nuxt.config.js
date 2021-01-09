@@ -77,13 +77,6 @@ export default {
     googleAnalyticsId: process.env.GOOGLE_ANALYTICS_ID,
   },
 
-  router: {
-    middleware: [
-      'rememberPage',
-      'googleAnalytics',
-    ],
-  },
-
   fontawesome: {
     icons: {
       solid: [
@@ -94,5 +87,12 @@ export default {
   },
 
   sitemap: sitemapSettings,
+
+  router: {
+    middleware: [
+      'rememberPage',
+      'googleAnalytics',
+    ],
+  },
 
 }
