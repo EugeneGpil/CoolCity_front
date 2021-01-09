@@ -28,15 +28,6 @@ export default {
       flag: flagPaths.thai_flag_path,
     }
   },
-  
-  mounted() {
-    this.$store.dispatch(
-      'language/setLanguage',
-      routerSharedMethods.getLanguage(
-        this.$router.currentRoute
-      )
-    )
-  },
 
   methods: {
 
