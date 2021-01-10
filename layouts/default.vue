@@ -22,7 +22,7 @@ export default {
   computed: {
 
     language() {
-      return this.$store.state.language.language
+      return this.$i18n.locale
     },
 
   }

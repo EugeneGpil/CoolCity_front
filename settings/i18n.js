@@ -1,6 +1,6 @@
 export default {
   lazy: true,
-  seo: false,
+  seo: true,
   defaultLocale: 'th',
   vueI18n: {
     fallbackLocale: 'en',
@@ -27,4 +27,7 @@ export default {
   ],
   langDir: 'lang/',
   strategy: 'prefix',
+  detectBrowserLanguage: {
+    onlyOnRoot: true,
+  },
 }

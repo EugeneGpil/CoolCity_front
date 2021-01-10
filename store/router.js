@@ -1,14 +1,20 @@
-import localStorageSharedMethods from '~/sharedMethods/localStorage'
 import routerSharedMethods from '~/sharedMethods/router'
 
 const generateRouteNameWithLocale = (routeName, locale) => {
   return `${routeName}___${locale ?? 'th'}`
 }
 
-const getRouteNameWithLocale = (routeName) => {
+const getRouteNameWithLocale = (routeName, locale = null) => {
+
+  if (locale === null || locale === undefined) {
+    return generateRouteNameWithLocale(
+      routeName,
+      routerSharedMethods.getLanguage($nuxt._router.history.current)
+    )
+  }
   return generateRouteNameWithLocale(
     routeName,
-    localStorageSharedMethods.getLanguage()
+    locale
   )
 }
 
@@ -39,14 +45,16 @@ export const actions = {
     if (typeof toGoObjectOrString === 'string') {
       toGoObject = {
         name: toGoObjectOrString,
+        language: null,
       }
     }
     this.app.router.push(
       {
-        name: getRouteNameWithLocale(toGoObject.name),
-        params: toGoObject.params
+        name: getRouteNameWithLocale(toGoObject.name, toGoObject.language),
+        params: toGoObject.params,
       }
     )
+
   },
 
   setCurrentPage(context, currentPage) {
