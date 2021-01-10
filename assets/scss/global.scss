@@ -18,18 +18,27 @@ $unavailable-solid-color: rgb(212, 211, 211);
 
 @font-face {
   font-family: "Qwigley";
+  font-style: normal;
+  font-weight: 400;
   src: local("Qwigley"),
     url(~assets/fonts/Qwigley/Qwigley-Regular.ttf) format("truetype");
+  font-display: swap;
 }
 @font-face {
   font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 400;
   src: local("Montserrat"),
     url(~assets/fonts/Montserrat/Montserrat-Regular.ttf) format("truetype");
+  font-display: swap;
 }
 @font-face {
   font-family: "Chakra Petch";
+  font-style: normal;
+  font-weight: 400;
   src: local("Chakra Petch"),
     url(~assets/fonts/ChakraPetch/ChakraPetch-Regular.ttf) format("truetype");
+  font-display: swap;
 }
 
 * {
