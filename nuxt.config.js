@@ -22,8 +22,14 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
     ],
     script: [
-      { src: `https://www.googletagmanager.com/gtag/js?id=${process.env.GOOGLE_ANALYTICS_ID}` },
-      { src: '/js/fb_sdk.js' },
+      {
+        src: `https://www.googletagmanager.com/gtag/js?id=${process.env.GOOGLE_ANALYTICS_ID}`,
+        async: true,
+      },
+      {
+        src: '/js/fb_sdk.js',
+        async: true,
+      },
     ],
   },
 
