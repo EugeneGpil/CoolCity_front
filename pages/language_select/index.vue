@@ -53,8 +53,11 @@ export default {
   methods: {
 
     setLanguage(language) {
-      this.$store.dispatch('language/setLanguage', language)
-      this.$store.dispatch('router/goTo', this.previousPage ?? pageNames.main)
+      this.$store.dispatch('router/goTo', {
+        name: this.previousPage ? this.previousPage.name : pageNames.main,
+        params: this.previousPage ? this.previousPage.params : {},
+        language,
+      })
     },
 
   },

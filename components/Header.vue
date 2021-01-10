@@ -17,17 +17,10 @@
 <script>
 
 import flagPaths from '~/settings/flags'
-import localStorageSharedMethods from '~/sharedMethods/localStorage'
 import pageNames from '~/settings/pageNames'
 import routerSharedMethods from '~/sharedMethods/router'
 
 export default {
-
-  data() {
-    return {
-      flag: flagPaths.thai_flag_path,
-    }
-  },
 
   methods: {
 
@@ -41,38 +34,31 @@ export default {
 
     goToMain() {
       this.$store.dispatch('router/goTo', pageNames.main)
-    }
+    },
 
   },
 
   computed: {
 
     language() {
-      return this.$store.state.language.language
+      return this.$i18n.locale
     },
 
     currentPage() {
       return this.$store.getters['router/currentPage']
     },
 
-  },
+    flag() {
 
-  watch: {
-
-    language() {
-      let flagPath = flagPaths.thai_flag_path
-
-      if (this.language == 'th') {
-        flagPath = flagPaths.thai_flag_path
-
-      } else if (this.language == 'en') {
-        flagPath = flagPaths.british_flag_path
-
-      } else if (this.language == 'ru') {
-        flagPath = flagPaths.russian_flag_path
+      if (this.language == 'en') {
+        return flagPaths.british_flag_path
       }
 
-      this.flag = flagPath
+      if (this.language == 'ru') {
+        return flagPaths.russian_flag_path
+      }
+
+      return flagPaths.thai_flag_path
     },
 
   },
