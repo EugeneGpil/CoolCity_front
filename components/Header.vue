@@ -76,6 +76,7 @@ export default {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  height: 50px;
   @media screen and (min-width: $first-width-step) {
     padding-right: 5px;
   }

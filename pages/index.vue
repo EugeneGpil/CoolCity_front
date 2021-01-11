@@ -11,7 +11,21 @@
         class="product-cart"
         @click="goToProduct(product.product_id, product.id)"
       >
-        <img class="product-image" :src="product.pictures[0].url">
+        <!-- <div class="product-image-container">
+          <img class="product-image" :src="product.pictures[0].url">
+        </div> -->
+        <div class="images-container">
+          <div class="main-image-container">
+            <div class="image-main-container">
+              <div class="image-subcontainer">
+                <div class="image"
+                  :style="`background-image: url('${product.pictures[0].url}')`"
+                >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="product-info">
           <h2 class="product-title th">
             {{ getPositionAttribute(product, 'title', $i18n.locale) }}
@@ -112,8 +126,17 @@ export default {
     width: calc(100%/3);
   }
 }
-.product-image {
+.product-image-container {
   width: 100%;
+  padding-top: 100%;
+  position: relative;
+}
+.product-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
 .product-info {
   padding-top: 15px;
