@@ -106,6 +106,7 @@ export default {
   flex-direction: column;
   cursor: pointer;
   max-width: 430px;
+  width: 100%;
   @media screen and (min-width: $first-width-step) {
     padding-left: 5px;
     padding-right: 5px;
@@ -126,17 +127,8 @@ export default {
     width: calc(100%/3);
   }
 }
-.product-image-container {
-  width: 100%;
-  padding-top: 100%;
-  position: relative;
-}
-.product-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
+.images-container {
+  min-width: 0;
 }
 .product-info {
   padding-top: 15px;
