@@ -10,7 +10,7 @@
     "generate": "nuxt-ts generate",
     "lint:js": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "lint": "npm run lint:js",
-    "release": "git pull && npm run build && npx kill-port 3000 && npm run start &"
+    "release": "git pull && npm i && npm run build && npx kill-port 3000 && npm run start &"
   },
   "dependencies": {
     "@nuxt/typescript-runtime": "^2.0.0",
