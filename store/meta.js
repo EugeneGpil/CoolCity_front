@@ -21,7 +21,7 @@ export const actions = {
     }
 
     let metaImage = (await(metaService.getDefaultImage())).data.payload
-    context.commit('setImage', metaImage)
+    context.commit('setImage', process.env.baseUrl + metaImage)
   },
 }
 
