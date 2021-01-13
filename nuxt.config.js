@@ -98,6 +98,7 @@ export default {
     middleware: [
       'rememberPage',
       'googleAnalytics',
+      'getDefaultMetaImage',
     ],
   },
 

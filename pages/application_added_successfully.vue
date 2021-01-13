@@ -46,12 +46,19 @@ export default {
 
     selectedPosition() {
       return this.$store.state.products.selectedPosition
+    },
+
+    metaImage() {
+      return this.$store.state.meta.image
     }
 
   },
 
   head() {
-    return head.default.bind(this)(false)
+    return head.default.bind(this)({
+      are_robots_allowed: false,
+      meta_image: this.metaImage,
+    })
   },
 
 }

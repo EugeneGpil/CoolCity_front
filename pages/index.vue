@@ -11,9 +11,6 @@
         class="product-cart"
         @click="goToProduct(product.product_id, product.id)"
       >
-        <!-- <div class="product-image-container">
-          <img class="product-image" :src="product.pictures[0].url">
-        </div> -->
         <div class="images-container">
           <div class="main-image-container">
             <div class="image-main-container">
@@ -93,7 +90,9 @@ export default {
   },
 
   head() {
-    return head.default.bind(this)()
+    return head.default.bind(this)({
+      meta_image: this.products[0].pictures[0].url,
+    })
   },
 }
 </script>
