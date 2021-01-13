@@ -87,11 +87,15 @@ export default {
       return productSharedMethods.getPositionAttribute
     },
 
+    metaImage() {
+      return this.$store.state.meta.image
+    }
+
   },
 
   head() {
     return head.default.bind(this)({
-      meta_image: this.products[0].pictures[0].url,
+      meta_image: this.metaImage,
     })
   },
 }
