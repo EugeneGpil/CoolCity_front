@@ -11,10 +11,12 @@
         class="product-cart"
         @click="goToProduct(product.product_id, product.id)"
       >
-        <div class="images-container">
-          <img class="product-image" :src="product.pictures[0].url"
-            :alt="getPositionAttribute(product, 'title', $i18n.locale)"
-          >
+        <div class="images-wrapper">
+          <div class="images-container">
+            <img class="product-image" :src="product.pictures[0].url"
+              :alt="getPositionAttribute(product, 'title', $i18n.locale)"
+            >
+          </div>
         </div>
         <div class="product-info">
           <h2 class="product-title th">

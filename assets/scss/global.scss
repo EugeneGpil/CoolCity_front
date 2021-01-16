@@ -90,13 +90,25 @@ $unavailable-solid-color: rgb(212, 211, 211);
 }
 .product-image {
   width: 100%;
+  position: absolute;
 }
 .images-container {
+  position: relative;
+  height: 0;
+  flex: 1;
+  padding-bottom: 100%;
   @media screen and (min-width: $product-page-first-width-step) {
     min-width: 300px;
     max-width: 600px;
-    flex: 1;
   }
+}
+.images-subcontainer {
+  position: absolute;
+  padding-top: 100%;
+}
+.images-wrapper {
+  flex: 1;
+  width: 100%;
 }
 .size {
   font-size: 25px;
