@@ -12,23 +12,16 @@
         @click="goToProduct(product.product_id, product.id)"
       >
         <div class="images-container">
-          <div class="main-image-container">
-            <div class="image-main-container">
-              <div class="image-subcontainer">
-                <div class="image"
-                  :style="`background-image: url('${product.pictures[0].url}')`"
-                >
-                </div>
-              </div>
-            </div>
-          </div>
+          <img class="product-image" :src="product.pictures[0].url"
+            :alt="getPositionAttribute(product, 'title', $i18n.locale)"
+          >
         </div>
         <div class="product-info">
           <h2 class="product-title th">
             {{ getPositionAttribute(product, 'title', $i18n.locale) }}
           </h2>
           <div class="product-title">
-            {{ product.sell_price }} <span class="currency">฿</span>
+            {{ getPositionAttribute(product, 'sell_price') }} <span class="currency">฿</span>
           </div>
         </div>
       </div>

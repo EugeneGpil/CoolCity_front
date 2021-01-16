@@ -88,29 +88,8 @@ $unavailable-solid-color: rgb(212, 211, 211);
   font-family: 'Chakra Petch', sans-serif;
   font-weight: 500;
 }
-.main-image-container {
-  display: flex;
-  align-items: center;
-}
-.image-main-container {
-  flex: 1;
-}
-.image-subcontainer {
-  position: relative;
-  height: 0;
-  border: none;
-  padding-top: 100%;
-}
-.image {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: $unavailable-color;
+.product-image {
+  width: 100%;
 }
 .images-container {
   @media screen and (min-width: $product-page-first-width-step) {

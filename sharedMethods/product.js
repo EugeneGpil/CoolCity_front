@@ -8,7 +8,7 @@ export default {
   },
 
   getPositionAttribute(position, attributeName, language = null) {
-    if (position === null) {
+    if (position === null || position === undefined) {
       return ''
     }
     if (
