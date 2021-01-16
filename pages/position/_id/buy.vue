@@ -14,10 +14,12 @@
 
           <div class="product-info">
             
-            <div class="images-container">
-              <img class="product-image" :src="getPositionFirstPictureUrl(selectedPosition)"
-                :alt="getPositionAttribute(selectedPosition, 'title', $i18n.locale)"
-              >
+            <div class="images-wrapper">
+              <div class="images-container">
+                <img class="product-image" :src="getPositionFirstPictureUrl(selectedPosition)"
+                  :alt="getPositionAttribute(selectedPosition, 'title', $i18n.locale)"
+                >
+              </div>
             </div>
 
             <h2 class="product-title th product-name">

@@ -5,13 +5,15 @@
 
     <div v-if="!loading" class="wrapper">
       <div class="product-cart">
-        <div class="images-container">
-          <img class="product-image" :src="getPositionFirstPictureUrl(selectedPosition)"
-            :alt="getPositionAttribute(selectedPosition, 'title', $i18n.locale)"
-          >
-          <div class="in-image-arrows-container" :class="{hidden: !areArrowsVisible}">
-            <font-awesome-icon class="arrow left-arrow" icon="caret-left" />
-            <font-awesome-icon class="arrow right-arrow" icon="caret-right" />
+        <div class="images-wrapper">
+          <div class="images-container">
+            <img class="product-image" :src="getPositionFirstPictureUrl(selectedPosition)"
+              :alt="getPositionAttribute(selectedPosition, 'title', $i18n.locale)"
+            >
+            <div class="in-image-arrows-container" :class="{hidden: !areArrowsVisible}">
+              <font-awesome-icon class="arrow left-arrow" icon="caret-left" />
+              <font-awesome-icon class="arrow right-arrow" icon="caret-right" />
+            </div>
           </div>
         </div>
         <div class="product-info">
