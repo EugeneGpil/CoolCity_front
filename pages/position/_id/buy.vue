@@ -15,16 +15,9 @@
           <div class="product-info">
             
             <div class="images-container">
-              <div class="main-image-container">
-                <div class="image-main-container">
-                  <div class="image-subcontainer">
-                    <div class="image"
-                      :style="`background-image: url('${getPositionFirstPictureUrl(selectedPosition)}')`"
-                    >
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <img class="product-image" :src="getPositionFirstPictureUrl(selectedPosition)"
+                :alt="getPositionAttribute(selectedPosition, 'title', $i18n.locale)"
+              >
             </div>
 
             <h2 class="product-title th product-name">

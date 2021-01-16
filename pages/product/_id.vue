@@ -6,21 +6,12 @@
     <div v-if="!loading" class="wrapper">
       <div class="product-cart">
         <div class="images-container">
-          <div class="main-image-container">
-            <div class="image-main-container">
-              <div class="image-subcontainer">
-                <div class="image"
-                  :style="`background-image: url('${getPositionFirstPictureUrl(selectedPosition)}')`"
-                >
-                  <div class="in-image-arrows-container"
-                    :class="{hidden: !areArrowsVisible}"
-                  >
-                    <font-awesome-icon class="arrow left-arrow" icon="caret-left" />
-                    <font-awesome-icon class="arrow right-arrow" icon="caret-right" />
-                  </div>
-                </div>
-              </div>
-            </div>
+          <img class="product-image" :src="getPositionFirstPictureUrl(selectedPosition)"
+            :alt="getPositionAttribute(selectedPosition, 'title', $i18n.locale)"
+          >
+          <div class="in-image-arrows-container" :class="{hidden: !areArrowsVisible}">
+            <font-awesome-icon class="arrow left-arrow" icon="caret-left" />
+            <font-awesome-icon class="arrow right-arrow" icon="caret-right" />
           </div>
         </div>
         <div class="product-info">

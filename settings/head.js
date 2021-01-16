@@ -7,6 +7,11 @@ let getDefaultMeta = function() {
       property: 'og:url',
       content: `${process.env.baseUrl}${this.$router.currentRoute.path}`,
     },
+    {
+      hid: 'author',
+      name: 'author',
+      content: 'https://github.com/eugenegpil',
+    },
   ]
 }
 
